@@ -27,7 +27,10 @@
         </div>
         <div class="nav-right">
             <button id="mobile-search-btn" class="icon-btn show-sm" aria-label="Open search" title="Search">🔍</button>
-            <div id="user-menu" class="user-menu">
+            <div id="auth-buttons" class="auth-buttons">
+                <button id="login-button" class="btn btn-primary">Login</button>
+            </div>
+            <div id="user-menu" class="user-menu hidden">
                 <div class="profile-dropdown">
                     <button id="profile-btn" class="profile-btn" aria-label="User profile menu">
                         <div class="profile-avatar">
@@ -39,6 +42,12 @@
                         </svg>
                     </button>
                     <div id="profile-dropdown" class="profile-dropdown-menu hidden">
+                        <button id="set-password-btn" class="dropdown-item">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 1L5 4h2v4H3V6L0 9l3 3v-2h4v4H5l3 3 3-3h-2v-4h4v2l3-3-3-3v2H9V4h2L8 1z"/>
+                            </svg>
+                            Set Password
+                        </button>
                         <button id="logout-btn" class="dropdown-item logout-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
@@ -134,14 +143,61 @@
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
-    <script src="config.js" defer></script>
     <script src="study-data.js" defer></script>
     <script src="chemistry-data.js" defer></script>
     <script src="mathematics-data.js" defer></script>
     <script src="neet-physics-data.js" defer></script>
     <script src="neet-chemistry-data.js" defer></script>
     <script src="neet-biology-data.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     <script src="study-script.js" defer></script>
+    <!-- Login Modal -->
+    <dialog id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>Login to CrackWise</h2>
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full">Login</button>
+                <button type="button" id="send-magic-btn" class="btn btn-outline w-full mt-2">Send Magic Link Instead</button>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    
+    <!-- Password Set Modal for Magic Link Users -->
+    <dialog id="set-password-modal" class="modal">
+      <div class="modal-header">
+        <h3>Set Your Password</h3>
+        <button id="set-password-close" class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Create a password to easily log in next time without using a magic link.</p>
+        <form id="set-password-form">
+          <div class="field">
+            <label for="new-password">Enter Password</label>
+            <input type="password" id="new-password" required minlength="6">
+          </div>
+          <div class="field">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" required minlength="6">
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Set Password</button>
+            <button type="button" id="skip-password" class="btn btn-secondary">Skip for Now</button>
+          </div>
+        </form>
+        <div id="set-password-error" class="error-message"></div>
+      </div>
+    </dialog>
 </body>
 </html>

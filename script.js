@@ -17,30 +17,176 @@
   let DATA=null, FILTER_TEXT='', SUBJECT_CACHE=null;
   async function handleEmailConfirmation(){ const sb=getSupabase(); if(!sb) return; const urlParams=new URLSearchParams(window.location.search); const {data,error}=await sb.auth.getSession(); if(urlParams.get('type')==='signup' || urlParams.get('type')==='email'){ if(data?.session?.user){ window.location.href='index.html'; return; } } if(urlParams.get('type')==='recovery'){ if(data?.session?.user){ window.location.href='study.html'; return; } } if(urlParams.get('type')==='magiclink' || urlParams.get('type')==='otp'){ if(data?.session?.user){ // Fetch user exam preference from profiles table
         try {
-          const { data: profileData } = await sb.from('profiles').select('exam').eq('id', data.session.user.id).single();
+          const { data: profileData } = await sb.from('profiles').select('exam,has_password').eq('id', data.session.user.id).single();
           if (profileData?.exam) {
             setExam(profileData.exam);
           } else {
             // If no profile exists yet, try to get from user metadata
             const metaExam = data.session.user.user_metadata?.exam;
-            if (metaExam) {
-              setExam(metaExam);
+            let userName = data.session.user.user_metadata?.full_name || '';
+            let userExam = metaExam;
+            
+            // Check for pending signup data in localStorage (from magic link signup)
+            try {
+              const pendingData = localStorage.getItem('pending_signup_data');
+              if (pendingData) {
+                const parsedData = JSON.parse(pendingData);
+                // Only use if email matches and data is less than 24 hours old
+                if (parsedData.email === data.session.user.email && 
+                    (Date.now() - parsedData.timestamp) < 24 * 60 * 60 * 1000) {
+                  userName = parsedData.full_name || userName;
+                  userExam = parsedData.exam || userExam;
+                }
+                // Clear the pending data
+                localStorage.removeItem('pending_signup_data');
+              }
+            } catch (e) {
+              console.error('Error processing pending signup data:', e);
+            }
+            
+            if (userExam) {
+              setExam(userExam);
               // Create profile entry
               await sb.from('profiles').upsert({
                 id: data.session.user.id,
-                full_name: data.session.user.user_metadata?.full_name || '',
+                full_name: userName,
                 email: data.session.user.email,
-                exam: metaExam,
+                exam: userExam,
+                has_password: false, // Mark that user doesn't have password yet
                 updated_at: new Date().toISOString()
               }, {onConflict: 'id'});
             }
           }
+          
+          // Store a flag to show password modal for magic link users
+          if (profileData?.has_password === false || profileData?.has_password === undefined) {
+            localStorage.setItem('show_set_password_modal', 'true');
+          }
+          
         } catch (err) {
           console.error('Error fetching user profile:', err);
         }
-        window.location.href='study.html'; return; } } }
-  function initCommon(){ const y=byId('year'); if(y) y.textContent=String(new Date().getFullYear()); applyTheme(); }
-  function initSignup(){ const f=byId('signup-form'); if(!f) return; f.addEventListener('submit', async (e)=>{ e.preventDefault(); const name=byId('name').value.trim(); const email=byId('email').value.trim().toLowerCase(); const password=byId('password').value; const exam=(f.querySelector('input[name="exam"]:checked')||{}).value; const err=byId('signup-error'); if(!name||!email||!password||!exam){ err.textContent='Please fill all fields and select an exam.'; return;} const sb=getSupabase(); if(!sb){ setUserLegacy({name,email,passwordHash:btoa(password)}); setExam(exam); err.textContent=''; window.location.href='study.html'; return;} const {error}=await sb.auth.signUp({email,password,options:{data:{full_name:name,exam}}}); if(error){ err.textContent=error.message; return;} await upsertProfileExam(exam, name, email); // Create profiles table entry if it doesn't exist
+        window.location.href='index.html'; return; } } }
+  function initCommon(){ const y=byId('year'); if(y) y.textContent=String(new Date().getFullYear()); applyTheme(); 
+    // For testing password modal
+    window.testPasswordModal = function() {
+      localStorage.setItem('show_set_password_modal', 'true');
+      const modal = byId('set-password-modal');
+      if (modal) {
+        console.log('Opening password modal for testing');
+        modal.showModal();
+      } else {
+        console.log('Password modal element not found');
+      }
+    };
+    
+    // Check if we need to show the set password modal for magic link users
+    const setPasswordModal = byId('set-password-modal');
+    if (setPasswordModal && localStorage.getItem('show_set_password_modal') === 'true') {
+      console.log('Showing set password modal from initCommon');
+      // Remove the flag so we don't show it again
+      localStorage.removeItem('show_set_password_modal');
+      // Show the set password modal
+      setTimeout(() => {
+        setPasswordModal.showModal();
+      }, 1000); // Small delay to ensure DOM is ready
+    }
+    
+    // Set up password modal functionality
+    setupPasswordModal();
+  }
+  
+  function setupPasswordModal() {
+    const setPasswordModal = byId('set-password-modal');
+    const setPasswordClose = byId('set-password-close');
+    const setPasswordForm = byId('set-password-form');
+    const setPasswordError = byId('set-password-error');
+    const skipPasswordBtn = byId('skip-password');
+    
+    if (!setPasswordModal) return;
+    
+    if (setPasswordClose) {
+      setPasswordClose.addEventListener('click', () => setPasswordModal.close());
+    }
+    
+    if (skipPasswordBtn) {
+      skipPasswordBtn.addEventListener('click', () => {
+        setPasswordModal.close();
+        // Redirect to study page or home page
+        window.location.href = 'study.html';
+      });
+    }
+    
+    if (setPasswordForm) {
+      setPasswordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const newPassword = byId('new-password').value;
+        const confirmPassword = byId('confirm-password').value;
+        
+        // Reset error message
+        if (setPasswordError) setPasswordError.textContent = '';
+        
+        // Validate passwords match
+        if (newPassword !== confirmPassword) {
+          if (setPasswordError) {
+            setPasswordError.textContent = 'Passwords do not match';
+            return;
+          }
+        }
+        
+        // Validate password length
+        if (newPassword.length < 6) {
+          if (setPasswordError) {
+            setPasswordError.textContent = 'Password must be at least 6 characters';
+            return;
+          }
+        }
+        
+        try {
+          const sb = getSupabase();
+          if (!sb) {
+            if (setPasswordError) setPasswordError.textContent = 'Error: Could not connect to authentication service';
+            return;
+          }
+          
+          const { error } = await sb.auth.updateUser({
+            password: newPassword
+          });
+          
+          if (error) {
+            if (setPasswordError) setPasswordError.textContent = error.message;
+          } else {
+            // Update the profile to indicate user has set a password
+            const user = await getUser();
+            if (user) {
+              await sb.from('profiles').update({
+                has_password: true,
+                updated_at: new Date().toISOString()
+              }).eq('id', user.id);
+            }
+            
+            // Show success message
+            if (setPasswordError) {
+              setPasswordError.textContent = 'Password set successfully!';
+              setPasswordError.style.color = 'var(--success)';
+            }
+            
+            // Close modal and redirect to study page after a short delay
+            setTimeout(() => {
+              setPasswordModal.close();
+              window.location.href = 'study.html';
+            }, 1500);
+          }
+        } catch (err) {
+          console.error('Error setting password:', err);
+          if (setPasswordError) setPasswordError.textContent = 'An unexpected error occurred';
+        }
+      });
+    }
+  }
+  function initSignup(){ const f=byId('signup-form'); if(!f) return; 
+    // Regular signup with password
+    f.addEventListener('submit', async (e)=>{ e.preventDefault(); const name=byId('name').value.trim(); const email=byId('email').value.trim().toLowerCase(); const password=byId('password').value; const exam=(f.querySelector('input[name="exam"]:checked')||{}).value; const err=byId('signup-error'); if(!name||!email||!password||!exam){ err.textContent='Please fill all fields and select an exam.'; return;} const sb=getSupabase(); if(!sb){ setUserLegacy({name,email,passwordHash:btoa(password)}); setExam(exam); err.textContent=''; window.location.href='study.html'; return;} const {error}=await sb.auth.signUp({email,password,options:{data:{full_name:name,exam}}}); if(error){ err.textContent=error.message; return;} await upsertProfileExam(exam, name, email); // Create profiles table entry if it doesn't exist
 try {
   await sb.from('profiles').upsert({
     id: (await sb.auth.getUser()).data.user.id,
@@ -52,10 +198,285 @@ try {
 } catch (profileError) {
   console.error('Error creating profile:', profileError);
 }
-err.textContent='Account created! Please check your email to verify, then login from the home page.'; setTimeout(()=>window.location.href='index.html',2000); }); }
-  async function initLanding(){ const loginOpen=byId('login-open'); const loginOpenLanding=byId('login-open-landing'); const loginModal=byId('login-modal'); const loginClose=byId('login-close'); const loginForm=byId('login-form'); const loginError=byId('login-error'); const goDashBtn=byId('go-dashboard-cta'); const goDashHero=byId('go-dashboard-cta-hero'); const userMenu=byId('user-menu'); const authCtas=byId('auth-ctas'); const logoutBtn=byId('logout-btn'); const greeting=byId('user-greeting'); const startSmartPrep=byId('start-smart-prep'); const profileBtn=byId('profile-btn'); const profileDropdown=byId('profile-dropdown'); const userInitial=byId('user-initial'); const sendMagicBtn=byId('send-magic');
-    if(loginOpen) loginOpen.addEventListener('click',()=>loginModal.showModal()); if(loginOpenLanding) loginOpenLanding.addEventListener('click',()=>loginModal.showModal()); if(loginClose) loginClose.addEventListener('click',()=>loginModal.close());
-    if(startSmartPrep) startSmartPrep.addEventListener('click', async ()=>{ const user=await getUser(); if(user){ window.location.href='study.html'; } else { loginModal.showModal(); } });
+err.textContent='Account created! Please check your email to verify, then login from the home page.'; setTimeout(()=>window.location.href='index.html',2000); }); 
+    
+    // Magic link signup
+    const magicLinkBtn = byId('send-magic-signup');
+    if(magicLinkBtn) {
+      magicLinkBtn.addEventListener('click', async () => {
+        const name = byId('name').value.trim();
+        const email = byId('email').value.trim().toLowerCase();
+        const exam = (f.querySelector('input[name="exam"]:checked')||{}).value;
+        const err = byId('signup-error');
+        
+        if(!name || !email || !exam) {
+          err.textContent = 'Please fill your name, email and select an exam.';
+          return;
+        }
+        
+        const sb = getSupabase();
+        if(!sb) {
+          err.textContent = 'Magic link not available in offline mode.';
+          return;
+        }
+        
+        err.textContent = 'Sending magic link...';
+        
+        // Send magic link/OTP
+        const { error } = await sb.auth.signInWithOtp({
+          email,
+          options: {
+            emailRedirectTo: window.location.origin + '/index.html',
+            data: {
+              full_name: name,
+              exam: exam
+            }
+          }
+        });
+        
+        if(error) {
+          err.textContent = error.message;
+          err.style.color = 'red';
+        } else {
+          err.textContent = 'Magic link sent! Check your email for verification link.';
+          err.style.color = 'green';
+          
+          // Store user metadata for later profile creation
+          try {
+            localStorage.setItem('pending_signup_data', JSON.stringify({
+              full_name: name,
+              email: email,
+              exam: exam,
+              timestamp: Date.now()
+            }));
+            
+            // Set flag to show password setup modal after magic link authentication
+            localStorage.setItem('show_set_password_modal', 'true');
+            console.log('Set show_set_password_modal flag to true');
+          } catch (e) {
+            console.error('Error storing pending signup data:', e);
+          }
+          
+          setTimeout(() => {
+            err.style.color = '';
+            window.location.href = 'index.html';
+          }, 3000);
+        }
+      });
+    }
+  }
+  function initLogin() {
+  const loginForm = byId('login-form');
+  if (!loginForm) return;
+  
+  const loginError = byId('login-error');
+  const magicLinkBtn = byId('send-magic-login');
+  if (!magicLinkBtn) return;
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = byId('email').value.trim().toLowerCase();
+    const password = byId('password').value;
+
+    if (!email || !password) {
+      loginError.textContent = 'Please fill in all fields';
+      return;
+    }
+
+    const sb = getSupabase();
+    if (!sb) return;
+
+    try {
+      const { data, error } = await sb.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) throw error;
+
+      loginError.style.color = 'var(--success)';
+      loginError.textContent = 'Login successful! Redirecting...';
+      
+      setTimeout(() => {
+        window.location.href = 'study.html';
+      }, 1000);
+
+    } catch (error) {
+      console.error('Login error:', error);
+      loginError.textContent = error.message || 'Failed to login. Please try again.';
+    }
+  });
+
+  magicLinkBtn.addEventListener('click', async () => {
+    const email = byId('email').value.trim().toLowerCase();
+    
+    if (!email) {
+      loginError.textContent = 'Please enter your email first';
+      return;
+    }
+
+    const sb = getSupabase();
+    if (!sb) return;
+
+    try {
+      const { error } = await sb.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: window.location.origin
+        }
+      });
+
+      if (error) throw error;
+
+      loginError.style.color = 'var(--success)';
+      loginError.textContent = 'Magic link sent! Please check your email.';
+
+    } catch (error) {
+      console.error('Magic link error:', error);
+      loginError.textContent = error.message || 'Failed to send magic link. Please try again.';
+    }
+  });
+}
+
+async function initLanding() {
+  const loginOpen = byId('login-open');
+  const loginOpenLanding = byId('login-open-landing');
+  const loginModal = byId('login-modal');
+  const loginClose = byId('login-close');
+  const loginForm = byId('login-form');
+  const loginError = byId('login-error');
+  const goDashBtn = byId('go-dashboard-cta');
+  const goDashHero = byId('go-dashboard-cta-hero');
+  const userMenu = byId('user-menu');
+  const authCtas = byId('auth-ctas');
+  const logoutBtn = byId('logout-btn');
+  const greeting = byId('user-greeting');
+  const startSmartPrep = byId('start-smart-prep');
+  const profileBtn = byId('profile-btn');
+  const profileDropdown = byId('profile-dropdown');
+  const userInitial = byId('user-initial');
+  const sendMagicBtn = byId('send-magic');
+  const setPasswordModal = byId('set-password-modal');
+  const setPasswordClose = byId('set-password-close');
+  const setPasswordForm = byId('set-password-form');
+  const setPasswordError = byId('set-password-error');
+  const skipPasswordBtn = byId('skip-password');
+    
+    // Listen for auth state changes (important for magic link sign-ins)
+    const sb = getSupabase();
+    if (sb) {
+      sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+          const user = session?.user;
+          if (user) {
+            // Update UI with user info
+            if (greeting) {
+              const name = user.user_metadata?.full_name || user.email;
+              greeting.textContent = name;
+              if (userInitial) userInitial.textContent = name.charAt(0).toUpperCase();
+            }
+            if (authCtas) authCtas.classList.add('hidden');
+            if (userMenu) userMenu.classList.remove('hidden');
+            if (goDashBtn) goDashBtn.classList.remove('hidden');
+            if (goDashHero) goDashHero.classList.remove('hidden');
+            if (loginOpenLanding) loginOpenLanding.classList.add('hidden');
+            if (startSmartPrep) startSmartPrep.textContent = 'Go to Study Materials';
+            
+            // Check if we need to show the set password modal for magic link users
+            console.log('Checking for set password modal flag:', localStorage.getItem('show_set_password_modal'));
+            console.log('Set password modal element exists:', !!setPasswordModal);
+            
+            if (setPasswordModal && localStorage.getItem('show_set_password_modal') === 'true') {
+              console.log('Showing set password modal');
+              // Remove the flag so we don't show it again
+              localStorage.removeItem('show_set_password_modal');
+              // Show the set password modal
+              setPasswordModal.showModal();
+            } else {
+              console.log('Not showing set password modal');
+            }
+          }
+        } else if (event === 'SIGNED_OUT') {
+          if (authCtas) authCtas.classList.remove('hidden');
+          if (userMenu) userMenu.classList.add('hidden');
+          if (goDashBtn) goDashBtn.classList.add('hidden');
+          if (goDashHero) goDashHero.classList.add('hidden');
+          if (loginOpenLanding) loginOpenLanding.classList.remove('hidden');
+          if (startSmartPrep) startSmartPrep.textContent = 'Start Smart Prep';
+        }
+      });
+    }
+    if(loginOpen) loginOpen.addEventListener('click',()=>{ window.location.href='login.html'; }); 
+    if(loginOpenLanding) loginOpenLanding.addEventListener('click',()=>{ window.location.href='login.html'; }); 
+    if(loginClose) loginClose.addEventListener('click',()=>loginModal.close());
+    if(startSmartPrep) startSmartPrep.addEventListener('click', async ()=>{ const user=await getUser(); if(user){ window.location.href='study.html'; } else { window.location.href='login.html'; } });
+    
+    // Set Password Modal functionality for magic link users
+    if(setPasswordModal) {
+      if(setPasswordClose) setPasswordClose.addEventListener('click', () => setPasswordModal.close());
+      
+      if(skipPasswordBtn) skipPasswordBtn.addEventListener('click', () => {
+        setPasswordModal.close();
+        window.location.href = 'study.html';
+      });
+      
+      if(setPasswordForm) setPasswordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        // Reset error message
+        if(setPasswordError) setPasswordError.textContent = '';
+        
+        // Validate passwords match
+        if(newPassword !== confirmPassword) {
+          if(setPasswordError) {
+            setPasswordError.textContent = 'Passwords do not match';
+            return;
+          }
+        }
+        
+        // Validate password length
+        if(newPassword.length < 6) {
+          if(setPasswordError) {
+            setPasswordError.textContent = 'Password must be at least 6 characters';
+            return;
+          }
+        }
+        
+        try {
+          const sb = getSupabase();
+          if(!sb) {
+            if(setPasswordError) setPasswordError.textContent = 'Error: Could not connect to authentication service';
+            return;
+          }
+          
+          const { error } = await sb.auth.updateUser({
+            password: newPassword
+          });
+          
+          if(error) {
+            if(setPasswordError) setPasswordError.textContent = error.message;
+          } else {
+            // Update the profile to indicate user has set a password
+            const user = await getUser();
+            if(user) {
+              await sb.from('profiles').update({
+                has_password: true,
+                updated_at: new Date().toISOString()
+              }).eq('id', user.id);
+            }
+            
+            // Close modal and redirect to study page
+            setPasswordModal.close();
+            window.location.href = 'study.html';
+          }
+        } catch(err) {
+          console.error('Error setting password:', err);
+          if(setPasswordError) setPasswordError.textContent = 'An unexpected error occurred';
+        }
+      });
+    }
     
     // Profile dropdown functionality
     if(profileBtn && profileDropdown) {
@@ -71,6 +492,22 @@ err.textContent='Account created! Please check your email to verify, then login 
         }
         profileBtn.setAttribute('aria-expanded', !isOpen);
       });
+      
+      // Set Password button functionality
+      const setPasswordBtn = byId('set-password-btn');
+      const setPasswordModal = byId('set-password-modal');
+      
+      if (setPasswordBtn && setPasswordModal) {
+        setPasswordBtn.addEventListener('click', () => {
+          // Close the dropdown
+          profileDropdown.classList.add('hidden');
+          profileDropdown.classList.remove('show');
+          profileBtn.setAttribute('aria-expanded', 'false');
+          
+          // Open the password modal
+          setPasswordModal.showModal();
+        });
+      }
       
       // Close dropdown when clicking outside
       document.addEventListener('click', (e) => {
@@ -483,7 +920,13 @@ err.textContent='Account created! Please check your email to verify, then login 
   const totalWeight=subjects.reduce((acc,s)=>acc+s.chapters.reduce((w,c)=>w+parseWeight(c.weightage),0),0); const covered=subjects.reduce((acc,s)=>acc+s.chapters.filter(c=>isChapterCompleted(s.subject,c.name)).reduce((w,c)=>w+parseWeight(c.weightage),0),0);
   
   const cc=byId('chapters-completed'), ct=byId('chapters-total'), cp=byId('chapters-percent'), mc=byId('marks-covered'), mt=byId('marks-total'); if(cc) cc.textContent=String(completed); if(ct) ct.textContent=String(totalChapters); if(cp) cp.textContent= totalChapters? String(Math.round((completed/totalChapters)*100)) : '0'; if(mc) mc.textContent=String(Math.round(covered)); if(mt) mt.textContent=String(Math.round(totalWeight)); const analytics=byId('subject-analytics'); if(!analytics) return; analytics.innerHTML=''; const frag=document.createDocumentFragment(); subjects.forEach(s=>{ const subjectWeight=s.chapters.reduce((w,c)=>w+parseWeight(c.weightage),0); const subjectCovered=s.chapters.filter(c=>isChapterCompleted(s.subject,c.name)).reduce((w,c)=>w+parseWeight(c.weightage),0); const pct=subjectWeight? Math.round((subjectCovered/subjectWeight)*100):0; const bar=document.createElement('div'); bar.className='bar'; bar.innerHTML=`<div class="bar-label"><span>${s.subject}</span><span>${pct}%</span></div><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>`; frag.appendChild(bar); }); analytics.appendChild(frag); }
-  document.addEventListener('DOMContentLoaded', ()=>{ initCommon(); handleEmailConfirmation(); if(byId('signup-form')) initSignup(); if(byId('landing')) initLanding(); if(byId('profile-link')) initProfile(); });
+  document.addEventListener('DOMContentLoaded', ()=>{ 
+    // Debug all modals on the page
+    console.log('All dialog elements on page:', document.querySelectorAll('dialog'));
+    console.log('Set password modal by ID:', document.getElementById('set-password-modal'));
+    
+    initCommon(); handleEmailConfirmation(); if(byId('signup-form')) initSignup(); if(byId('landing')) initLanding(); if(byId('profile-link')) initProfile(); if(byId('login-form')) initLogin();
+  });
   
   // Function to open study materials with specific chapter
   function openStudyMaterials(subject = 'physics', chapterName = null, chapterKey = null) {

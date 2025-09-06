@@ -48,6 +48,12 @@
                 </svg>
                 Study Materials
               </a>
+              <button id="set-password-btn" class="dropdown-item">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 1L5 4h2v4H3V6L0 9l3 3v-2h4v4H5l3 3 3-3h-2v-4h4v2l3-3-3-3v2H9V4h2L8 1z"/>
+                </svg>
+                Set Password
+              </button>
               <button id="logout-btn" class="dropdown-item logout-item">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                   <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
@@ -209,24 +215,14 @@
 
 
     <!-- Login Modal -->
-    <dialog id="login-modal" class="modal">
-      <div class="modal-card">
+    <dialog id="login-modal" class="modal centered">
+      <div class="modal-card auth-card">
         <div class="modal-header">
-          <h3>Welcome back</h3>
+          <h3>Welcome back to CrackWise</h3>
           <button type="button" id="login-close" class="icon-btn" aria-label="Close">✕</button>
         </div>
-        <div class="modal-body login-grid">
-                <aside class="login-info">
-        <div class="login-brand">CrackWise</div>
-            <ul class="benefits">
-              <li>High-weightage chapters first</li>
-              <li>Formula sheets & PYQs</li>
-              <li>Quick quizzes for recall</li>
-              <li>Progress analytics</li>
-            </ul>
-            <p class="muted tiny">New here? <a href="signup.html">Create an account</a>. Please verify your email after signup.</p>
-          </aside>
-          <form id="login-form" method="dialog" class="modal-form" autocomplete="on">
+        <div class="modal-body">
+          <form id="login-form" method="dialog" class="auth-form" autocomplete="on">
             <div class="field">
               <label for="login-email">Email</label>
               <input id="login-email" type="email" placeholder="you@example.com" required />
@@ -235,12 +231,22 @@
               <label for="login-password">Password</label>
               <input id="login-password" type="password" placeholder="••••••••" required />
             </div>
-            <div class="modal-actions stack-sm">
-              <button type="submit" class="btn primary">Login</button>
-              <button type="button" id="send-magic" class="btn secondary">Send magic link</button>
-            </div>
+            <button type="submit" class="btn primary full">Login</button>
+            <button type="button" id="send-magic" class="btn secondary full">Use Magic Link Instead</button>
             <p id="login-error" class="form-error" role="alert"></p>
+            <div class="form-footer">
+              <p>New here? <a href="signup.html">Create an account</a></p>
+            </div>
           </form>
+          <div class="auth-benefits">
+            <h4>Why Choose CrackWise?</h4>
+            <ul class="benefits-list">
+              <li>📊 High-weightage chapters first</li>
+              <li>📝 Formula sheets & PYQs</li>
+              <li>⚡ Quick quizzes for recall</li>
+              <li>📈 Progress analytics</li>
+            </ul>
+          </div>
         </div>
       </div>
     </dialog>
@@ -262,7 +268,7 @@
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
                 </svg>
               </a>
-              <a href="#" class="social-link" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/crackwise" class="social-link" aria-label="LinkedIn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
@@ -339,7 +345,64 @@
       </div>
     </footer>
 
-    <!-- Supabase UMD + config must load before app script -->
+    <!-- Set Password Modal for Magic Link Users -->
+    <dialog id="set-password-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Set Your Password</h3>
+          <button id="set-password-close" class="close-btn" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Please set a password for your account so you can easily login next time.</p>
+          <form id="set-password-form" class="auth-form">
+            <div class="form-group">
+              <label for="new-password">New Password</label>
+              <input type="password" id="new-password" name="new-password" required minlength="6" placeholder="Enter a secure password">
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" id="confirm-password" name="confirm-password" required minlength="6" placeholder="Confirm your password">
+            </div>
+            <div id="set-password-error" class="error-message"></div>
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Save Password</button>
+              <button type="button" id="skip-password" class="btn secondary">Skip for Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    </footer>
+
+    <!-- Password Set Modal for Magic Link Users -->
+    <dialog id="set-password-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Set Your Password</h3>
+          <button id="set-password-close" class="close-btn" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Please set a password for your account. This will allow you to login with your email and password in the future.</p>
+          <form id="set-password-form" class="form">
+            <div class="field">
+              <label for="new-password">New Password</label>
+              <input id="new-password" name="new-password" type="password" placeholder="Enter new password" minlength="6" required />
+            </div>
+            <div class="field">
+              <label for="confirm-password">Confirm Password</label>
+              <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm your password" minlength="6" required />
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn primary full">Set Password</button>
+              <button type="button" id="skip-password" class="btn secondary full">Skip for Now</button>
+            </div>
+            <p id="set-password-error" class="form-error" role="alert"></p>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
     <script src="config.js" defer></script>
     <script src="script.js" defer></script>
@@ -391,5 +454,31 @@
         }
       });
     </script>
+    
+    <!-- Password Set Modal for Magic Link Users -->
+    <dialog id="set-password-modal" class="modal">
+      <div class="modal-header">
+        <h3>Set Your Password</h3>
+        <button id="set-password-close" class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Create a password to easily log in next time without using a magic link.</p>
+        <form id="set-password-form">
+          <div class="field">
+            <label for="new-password">Enter Password</label>
+            <input type="password" id="new-password" required minlength="6">
+          </div>
+          <div class="field">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" required minlength="6">
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Set Password</button>
+            <button type="button" id="skip-password" class="btn btn-secondary">Skip for Now</button>
+          </div>
+        </form>
+        <div id="set-password-error" class="error-message"></div>
+      </div>
+    </dialog>
   </body>
 </html>

@@ -13,6 +13,17 @@
         completed: false
     };
     
+    // Supabase client getter (reusing from script.js)
+    let supabaseClient = null;
+    function getSupabase() {
+        if (supabaseClient) return supabaseClient;
+        if (window.supabase && window.__SUPABASE_URL && window.__SUPABASE_ANON_KEY) {
+            supabaseClient = window.supabase.createClient(window.__SUPABASE_URL, window.__SUPABASE_ANON_KEY);
+            return supabaseClient;
+        }
+        return null;
+    }
+    
     // Performance optimization: Cache DOM elements
     const domCache = {};
     let dataLoaded = false;
@@ -142,12 +153,7 @@
 
     // Utility functions - optimized with caching
     const byId = (id) => getCachedElement(id);
-    const getSupabase = () => {
-        if (window.supabase && window.__SUPABASE_URL && window.__SUPABASE_ANON_KEY) {
-            return window.supabase.createClient(window.__SUPABASE_URL, window.__SUPABASE_ANON_KEY);
-        }
-        return null;
-    };
+    // Supabase client is already defined above, removing duplicate
 
     // Theme management - Always dark mode
     function initTheme() {
@@ -159,6 +165,137 @@
         }
     }
 
+    // Authentication functions
+    async function getUser() {
+        const sb = getSupabase();
+        if (!sb) {
+            try {
+                return JSON.parse(localStorage.getItem('smartstudy_user') || 'null');
+            } catch {
+                return null;
+            }
+        }
+        const { data } = await sb.auth.getUser();
+        return data?.user || null;
+    }
+    
+    // Initialize authentication listeners
+    function initAuthListeners() {
+        const loginModal = document.getElementById('login-modal');
+        const loginForm = document.getElementById('login-form');
+        const sendMagicBtn = document.getElementById('send-magic-btn');
+        const loginButton = document.getElementById('login-button');
+        const userMenu = document.getElementById('user-menu');
+        const authButtons = document.getElementById('auth-buttons');
+        
+        if (!loginModal || !loginForm || !sendMagicBtn) return;
+        
+        // Check auth status and update UI
+        getUser().then(user => {
+            if (user) {
+                if (userMenu) userMenu.classList.remove('hidden');
+                if (authButtons) authButtons.classList.add('hidden');
+                
+                // Update user profile display
+                updateUserProfileDisplay(user);
+            } else {
+                if (userMenu) userMenu.classList.add('hidden');
+                if (authButtons) authButtons.classList.remove('hidden');
+            }
+        });
+        
+        // Listen for auth state changes (important for magic link sign-ins)
+        const sb = getSupabase();
+        if (sb) {
+            sb.auth.onAuthStateChange((event, session) => {
+                if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+                    const user = session?.user;
+                    if (user) {
+                        if (userMenu) userMenu.classList.remove('hidden');
+                        if (authButtons) authButtons.classList.add('hidden');
+                        
+                        // Update user profile display
+                        updateUserProfileDisplay(user);
+                    }
+                } else if (event === 'SIGNED_OUT') {
+                    if (userMenu) userMenu.classList.add('hidden');
+                    if (authButtons) authButtons.classList.remove('hidden');
+                }
+            });
+        }
+        
+        // Login button click
+        if (loginButton) {
+            loginButton.addEventListener('click', () => {
+                loginModal.showModal();
+            });
+        }
+        
+        // Login form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+            
+            try {
+                const sb = getSupabase();
+                if (!sb) {
+                    alert('Authentication service unavailable');
+                    return;
+                }
+                
+                const { data, error } = await sb.auth.signInWithPassword({
+                    email,
+                    password
+                });
+                
+                if (error) throw error;
+                
+                loginModal.close();
+                window.location.reload();
+            } catch (error) {
+                alert('Login failed: ' + error.message);
+            }
+        });
+        
+        // Magic link button
+        sendMagicBtn.addEventListener('click', async () => {
+            const email = document.getElementById('login-email').value;
+            
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            try {
+                const sb = getSupabase();
+                if (!sb) {
+                    alert('Authentication service unavailable');
+                    return;
+                }
+                
+                const { error } = await sb.auth.signInWithOtp({
+                    email,
+                    options: {
+                        emailRedirectTo: window.location.origin + '/study.html'
+                    }
+                });
+                
+                if (error) throw error;
+                
+                alert('Magic link sent! Please check your email.');
+                loginModal.close();
+            } catch (error) {
+                alert('Failed to send magic link: ' + error.message);
+            }
+        });
+    }
+    
     // Load progress data from Supabase
     async function loadProgressFromSupabase() {
         try {
@@ -221,6 +358,33 @@
     }
     
     // User authentication
+    // Function to update user profile display elements
+    function updateUserProfileDisplay(user) {
+        if (!user) return;
+        
+        const greeting = byId('user-greeting');
+        const userInitial = byId('user-initial');
+        const profileBtn = byId('profile-btn');
+        
+        if (greeting) {
+            const name = user.user_metadata?.full_name || user.email;
+            greeting.textContent = name;
+        }
+        
+        if (userInitial) {
+            const name = user.user_metadata?.full_name || user.email;
+            userInitial.textContent = name.charAt(0).toUpperCase();
+        }
+        
+        // Update profile button if it exists
+        if (profileBtn) {
+            const userMenu = document.getElementById('user-menu');
+            if (userMenu) userMenu.classList.remove('hidden');
+            const authButtons = document.getElementById('auth-buttons');
+            if (authButtons) authButtons.classList.add('hidden');
+        }
+    }
+    
     async function initAuth() {
         const user = await getUser();
         if (!user) {
@@ -231,13 +395,8 @@
         // Load progress data from Supabase
         await loadProgressFromSupabase();
         
-        const greeting = byId('user-greeting');
-        const userInitial = byId('user-initial');
-        if (greeting && user) {
-            const name = user.user_metadata?.full_name || user.email;
-            greeting.textContent = name;
-            if (userInitial) userInitial.textContent = name.charAt(0).toUpperCase();
-        }
+        // Update user profile display
+        updateUserProfileDisplay(user);
 
         // Setup profile dropdown
         setupProfileDropdown();
@@ -294,6 +453,8 @@
         const profileBtn = byId('profile-btn');
         const profileDropdown = byId('profile-dropdown');
         const logoutBtn = byId('logout-btn');
+        const setPasswordBtn = byId('set-password-btn');
+        const setPasswordModal = byId('set-password-modal');
 
         if (profileBtn && profileDropdown) {
             profileBtn.addEventListener('click', (e) => {
@@ -303,6 +464,36 @@
                 profileDropdown.classList.toggle('show', !isOpen);
                 profileBtn.setAttribute('aria-expanded', !isOpen);
             });
+            
+            // Set Password button functionality
+            if (setPasswordBtn && setPasswordModal) {
+                setPasswordBtn.addEventListener('click', () => {
+                    // Close the dropdown
+                    profileDropdown.classList.add('hidden');
+                    profileDropdown.classList.remove('show');
+                    profileBtn.setAttribute('aria-expanded', 'false');
+                    
+                    // Open the password modal
+                    setPasswordModal.showModal();
+                });
+            }
+            
+            // Logout functionality
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    try {
+                        const sb = getSupabase();
+                        if (sb) {
+                            await sb.auth.signOut();
+                        }
+                        localStorage.removeItem('smartstudy_user');
+                        window.location.href = 'index.html';
+                    } catch (error) {
+                        console.error('Logout error:', error);
+                        alert('Failed to log out. Please try again.');
+                    }
+                });
+            }
 
             document.addEventListener('click', (e) => {
                 if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
@@ -1854,10 +2045,84 @@
         initTabs();
         initSearch();
         updateProgress();
+        setupPasswordModal();
 
         // Set current year
         const yearElement = byId('year');
         if (yearElement) yearElement.textContent = new Date().getFullYear();
+    }
+    
+    // Setup password modal functionality
+    function setupPasswordModal() {
+        const setPasswordModal = byId('set-password-modal');
+        const setPasswordClose = byId('set-password-close');
+        const skipPasswordBtn = byId('skip-password');
+        const setPasswordForm = byId('set-password-form');
+        const setPasswordError = byId('set-password-error');
+        
+        if(setPasswordModal) {
+            if(setPasswordClose) setPasswordClose.addEventListener('click', () => setPasswordModal.close());
+            
+            if(skipPasswordBtn) skipPasswordBtn.addEventListener('click', () => {
+                setPasswordModal.close();
+            });
+            
+            if(setPasswordForm) setPasswordForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const newPassword = document.getElementById('new-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                // Reset error message
+                if(setPasswordError) setPasswordError.textContent = '';
+                
+                // Validate passwords match
+                if(newPassword !== confirmPassword) {
+                    if(setPasswordError) {
+                        setPasswordError.textContent = 'Passwords do not match';
+                        return;
+                    }
+                }
+                
+                // Validate password length
+                if(newPassword.length < 6) {
+                    if(setPasswordError) {
+                        setPasswordError.textContent = 'Password must be at least 6 characters';
+                        return;
+                    }
+                }
+                
+                try {
+                    const sb = getSupabase();
+                    if(!sb) {
+                        if(setPasswordError) setPasswordError.textContent = 'Error: Could not connect to authentication service';
+                        return;
+                    }
+                    
+                    const { error } = await sb.auth.updateUser({
+                        password: newPassword
+                    });
+                    
+                    if(error) {
+                        if(setPasswordError) setPasswordError.textContent = error.message;
+                    } else {
+                        // Update the profile to indicate user has set a password
+                        const user = await getUser();
+                        if(user) {
+                            await sb.from('profiles').update({
+                                has_password: true,
+                                updated_at: new Date().toISOString()
+                            }).eq('id', user.id);
+                        }
+                        
+                        // Close modal
+                        setPasswordModal.close();
+                    }
+                } catch(err) {
+                    console.error('Error setting password:', err);
+                    if(setPasswordError) setPasswordError.textContent = 'An unexpected error occurred';
+                }
+            });
+        }
     }
 
     // Start the application

@@ -12,7 +12,7 @@
     <meta name="robots" content="index,follow" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -24,9 +24,19 @@
       </div>
       <div class="nav-right">
         <a class="nav-link" href="about.html">About</a>
-
+        <button id="mobile-menu-btn" class="icon-btn show-sm" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </header>
+    
+    <div id="mobile-menu" class="mobile-menu" style="display:none;">
+      <a href="about.html">About</a>
+    </div>
 
     <section class="page-hero">
       <h1>Contact Us</h1>
@@ -48,6 +58,7 @@
 
 
     <script src="script.js" defer></script>
+    <script src="responsive.js"></script>
   </body>
  </html>
 

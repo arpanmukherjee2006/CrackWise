@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create your account – CrackWise</title>
+    <title>Login to CrackWise</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
   </head>
@@ -19,42 +19,23 @@
 
     <main class="auth-page">
       <section class="card">
-        <h1>Create your account</h1>
-        <p class="muted">Study Less, Score More – focus on high-weightage topics only.</p>
+        <h1>Welcome back</h1>
+        <p class="muted">Login to continue your preparation journey.</p>
 
-        <form id="signup-form" class="form" novalidate>
-          <div class="field">
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" required />
-          </div>
+        <form id="login-form" class="form" novalidate>
           <div class="field">
             <label for="email">Email</label>
             <input id="email" name="email" type="email" placeholder="you@example.com" required />
           </div>
           <div class="field">
             <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="Create a password" minlength="6" required />
+            <input id="password" name="password" type="password" placeholder="Enter your password" required />
           </div>
 
-          <fieldset class="field">
-            <legend>Select Exam</legend>
-            <div class="radio-row">
-              <label class="radio">
-                <input type="radio" name="exam" value="JEE" required />
-                <span>JEE</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="exam" value="NEET" />
-                <span>NEET</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <button type="submit" class="btn primary full">Create Account</button>
-          <button type="button" id="send-magic-signup" class="btn secondary full">Use Magic Link Instead</button>
-          <p class="help-text">Already have an account? <a href="index.html">Login</a></p>
-          <p id="signup-error" class="form-error" role="alert"></p>
-          <p class="muted tiny">If email rate limit exceeded, use magic link for passwordless login.</p>
+          <button type="submit" class="btn primary full">Login</button>
+          <button type="button" id="send-magic-login" class="btn secondary full">Use Magic Link Instead</button>
+          <p class="help-text">New here? <a href="signup.html">Create an account</a></p>
+          <p id="login-error" class="form-error" role="alert"></p>
         </form>
       </section>
     </main>
