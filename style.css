@@ -3990,12 +3990,12 @@ html { scroll-behavior: smooth; }
   }
   
   .pill.enhanced {
-    padding: 6px 12px;
+    padding: 6px 6px;
     font-size: 12px;
   }
   
   .hero-stats {
-    flex-direction: column;
+    flex-direction: row;
     gap: 16px;
     padding: 20px 24px;
     margin-top: 24px;
