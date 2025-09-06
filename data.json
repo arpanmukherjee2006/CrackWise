@@ -1,0 +1,780 @@
+{
+  "JEE": {
+    "Physics": {
+      "chapters": [
+        {
+          "name": "Modern Physics",
+          "weightage": "8%",
+          "introduction": "Modern Physics covers quantum mechanics, atomic structure, nuclear physics, and semiconductor devices. This chapter is crucial for JEE with high weightage.",
+          "keywords": ["quantum", "atomic", "nuclear", "photoelectric", "bohr", "semiconductor"]
+        },
+        {
+          "name": "Electrostatics & Current Electricity",
+          "weightage": "7%",
+          "introduction": "Electrostatics deals with electric charges at rest, electric fields, and potential. Current electricity covers electric current, resistance, and circuits.",
+          "keywords": ["electric", "charge", "field", "potential", "current", "resistance", "circuit"]
+        },
+        {
+          "name": "Heat & Thermodynamics",
+          "weightage": "6%",
+          "introduction": "Thermodynamics studies heat, work, and energy transformations. Covers laws of thermodynamics, heat engines, and kinetic theory of gases.",
+          "keywords": ["heat", "temperature", "entropy", "enthalpy", "carnot", "gas", "engine"]
+        },
+        {
+          "name": "Oscillations & Waves",
+          "weightage": "6%",
+          "introduction": "Simple harmonic motion, wave motion, sound waves, and wave interference. Important for understanding periodic phenomena.",
+          "keywords": ["oscillation", "wave", "frequency", "amplitude", "resonance", "sound", "doppler"]
+        },
+        {
+          "name": "Optics",
+          "weightage": "5%",
+          "introduction": "Geometrical and wave optics covering reflection, refraction, lenses, mirrors, interference, diffraction, and polarization.",
+          "keywords": ["light", "lens", "mirror", "refraction", "interference", "diffraction", "polarization"]
+        },
+        {
+          "name": "Mechanics",
+          "weightage": "8%",
+          "introduction": "Classical mechanics including kinematics, dynamics, work-energy theorem, momentum, rotational motion, and gravitation.",
+          "keywords": ["motion", "force", "energy", "momentum", "rotation", "gravity", "collision"]
+        }
+      ]
+    },
+    "Chemistry": {
+      "chapters": [
+        {
+          "name": "Organic Chemistry – Some Basic Principles and Techniques",
+          "weightage": "4%",
+          "introduction": "Fundamental concepts of organic chemistry including nomenclature, isomerism, electronic effects, and basic reaction mechanisms.",
+          "keywords": ["organic", "nomenclature", "isomerism", "carbocation", "carbanion", "free radical"]
+        },
+        {
+          "name": "Aldehydes, Ketones and Carboxylic Acids",
+          "weightage": "5%",
+          "introduction": "Study of carbonyl compounds, their preparation, properties, and reactions. Important functional groups in organic chemistry.",
+          "keywords": ["aldehyde", "ketone", "carboxylic acid", "carbonyl", "nucleophilic addition"]
+        },
+        {
+          "name": "Haloalkanes and Haloarenes",
+          "weightage": "4%",
+          "introduction": "Alkyl and aryl halides, their preparation, properties, and reactions including substitution and elimination mechanisms.",
+          "keywords": ["haloalkane", "haloarene", "substitution", "elimination", "grignard", "wurtz"]
+        },
+        {
+          "name": "Hydrocarbons",
+          "weightage": "5%",
+          "introduction": "Alkanes, alkenes, alkynes, and aromatic hydrocarbons. Their preparation, properties, and characteristic reactions.",
+          "keywords": ["alkane", "alkene", "alkyne", "benzene", "aromatic", "petroleum"]
+        },
+        {
+          "name": "Amines",
+          "weightage": "4%",
+          "introduction": "Nitrogen-containing organic compounds, their classification, preparation, and reactions. Important in biological systems.",
+          "keywords": ["amine", "nitrogen", "basicity", "diazotization", "gabriel synthesis"]
+        },
+        {
+          "name": "Alcohols, Phenols and Ethers",
+          "weightage": "4%",
+          "introduction": "Oxygen-containing organic compounds, their preparation, properties, and reactions. Important functional groups.",
+          "keywords": ["alcohol", "phenol", "ether", "hydroxyl", "williamson synthesis"]
+        },
+        {
+          "name": "Biomolecules",
+          "weightage": "4%",
+          "introduction": "Carbohydrates, proteins, lipids, and nucleic acids. Essential molecules of life and their chemical properties.",
+          "keywords": ["carbohydrate", "protein", "lipid", "nucleic acid", "enzyme", "glucose"]
+        },
+        {
+          "name": "Coordination Compounds",
+          "weightage": "5%",
+          "introduction": "Complex compounds with central metal atoms, ligands, nomenclature, isomerism, and bonding theories.",
+          "keywords": ["coordination", "ligand", "complex", "chelate", "crystal field", "isomerism"]
+        },
+        {
+          "name": "The d- and f-Block Elements",
+          "weightage": "5%",
+          "introduction": "Transition metals and inner transition metals, their properties, compounds, and applications.",
+          "keywords": ["transition", "lanthanide", "actinide", "oxidation state", "magnetic", "colored"]
+        },
+        {
+          "name": "Classification of Elements and Periodicity in Properties",
+          "weightage": "4%",
+          "introduction": "Periodic table, periodic trends in atomic and physical properties of elements.",
+          "keywords": ["periodic", "atomic radius", "ionization", "electronegativity", "electron affinity"]
+        },
+        {
+          "name": "The p-Block Elements (Group 15 to 18)",
+          "weightage": "5%",
+          "introduction": "Nitrogen, oxygen, halogen, and noble gas families. Their properties, compounds, and reactions.",
+          "keywords": ["nitrogen", "oxygen", "halogen", "noble gas", "ammonia", "nitric acid"]
+        },
+        {
+          "name": "The p-Block Elements (Other Groups)",
+          "weightage": "4%",
+          "introduction": "Boron, carbon, and aluminum families. Their properties, allotropes, and important compounds.",
+          "keywords": ["boron", "carbon", "silicon", "aluminum", "allotrope", "semiconductor"]
+        },
+        {
+          "name": "Redox Reactions",
+          "weightage": "4%",
+          "introduction": "Oxidation-reduction reactions, balancing redox equations, and electrochemical applications.",
+          "keywords": ["oxidation", "reduction", "electron transfer", "oxidizing agent", "reducing agent"]
+        },
+        {
+          "name": "Thermodynamics",
+          "weightage": "5%",
+          "introduction": "Chemical thermodynamics, enthalpy, entropy, Gibbs free energy, and spontaneity of reactions.",
+          "keywords": ["enthalpy", "entropy", "gibbs", "spontaneous", "equilibrium", "heat capacity"]
+        },
+        {
+          "name": "Equilibrium",
+          "weightage": "5%",
+          "introduction": "Chemical equilibrium, Le Chatelier's principle, ionic equilibrium, acids, bases, and buffer solutions.",
+          "keywords": ["equilibrium", "le chatelier", "acid", "base", "buffer", "pH", "dissociation"]
+        },
+        {
+          "name": "Solutions",
+          "weightage": "4%",
+          "introduction": "Types of solutions, concentration terms, colligative properties, and ideal and non-ideal solutions.",
+          "keywords": ["solution", "molarity", "molality", "colligative", "osmosis", "vapor pressure"]
+        },
+        {
+          "name": "Chemical Kinetics",
+          "weightage": "4%",
+          "introduction": "Rate of chemical reactions, factors affecting reaction rates, and reaction mechanisms.",
+          "keywords": ["kinetics", "rate", "order", "mechanism", "activation energy", "catalyst"]
+        },
+        {
+          "name": "Electrochemistry",
+          "weightage": "5%",
+          "introduction": "Electrochemical cells, electrode potentials, electrolysis, and corrosion.",
+          "keywords": ["electrochemical", "electrode", "potential", "electrolysis", "battery", "corrosion"]
+        },
+        {
+          "name": "Some Basic Concepts of Chemistry",
+          "weightage": "4%",
+          "introduction": "Atomic and molecular masses, mole concept, stoichiometry, and percentage composition.",
+          "keywords": ["mole", "stoichiometry", "atomic mass", "molecular mass", "percentage", "empirical"]
+        },
+        {
+          "name": "Structure of Atom",
+          "weightage": "4%",
+          "introduction": "Atomic models, quantum numbers, electronic configuration, and periodic properties.",
+          "keywords": ["atomic structure", "quantum", "orbital", "electron", "configuration", "aufbau"]
+        },
+        {
+          "name": "Chemical Bonding and Molecular Structure",
+          "weightage": "5%",
+          "introduction": "Ionic, covalent, and metallic bonding, molecular geometry, hybridization, and molecular orbital theory.",
+          "keywords": ["bonding", "ionic", "covalent", "hybridization", "geometry", "molecular orbital"]
+        },
+        {
+          "name": "Principles Related to Practical Chemistry",
+          "weightage": "4%",
+          "introduction": "Qualitative and quantitative analysis, detection of elements and functional groups, and volumetric analysis.",
+          "keywords": ["qualitative", "quantitative", "analysis", "detection", "volumetric", "titration"]
+        }
+      ]
+    },
+    "Mathematics": {
+      "chapters": [
+        {
+          "name": "Calculus (Limits, Continuity, Differentiation)",
+          "weightage": "10%",
+          "introduction": "Fundamental concepts of calculus including limits, continuity, and differentiation with applications.",
+          "keywords": ["limit", "continuity", "derivative", "differentiation", "maxima", "minima"]
+        },
+        {
+          "name": "Integration & Differential Equations",
+          "weightage": "8%",
+          "introduction": "Integration techniques, definite integrals, applications of integration, and solving differential equations.",
+          "keywords": ["integration", "integral", "differential equation", "area", "volume"]
+        },
+        {
+          "name": "Coordinate Geometry",
+          "weightage": "7%",
+          "introduction": "Analytical geometry covering straight lines, circles, parabolas, ellipses, and hyperbolas.",
+          "keywords": ["coordinate", "line", "circle", "parabola", "ellipse", "hyperbola", "conic"]
+        }
+      ]
+    }
+  },
+  "NEET": {
+    "Physics": {
+      "chapters": [
+        {
+          "name": "Units and Measurements",
+          "weightage": "2-3%",
+          "introduction": "Fundamental concepts of physical quantities, units, and measurement techniques essential for all physics calculations.",
+          "keywords": ["units", "measurements", "dimensions", "errors", "significant figures"]
+        },
+        {
+          "name": "Motion in a Straight Line",
+          "weightage": "3-4%",
+          "introduction": "Kinematics of particles moving in one dimension, including uniform and non-uniform motion.",
+          "keywords": ["kinematics", "displacement", "velocity", "acceleration", "uniform motion"]
+        },
+        {
+          "name": "Motion in a Plane",
+          "weightage": "4-5%",
+          "introduction": "Two-dimensional motion including projectile motion and circular motion.",
+          "keywords": ["projectile", "circular motion", "angular velocity", "centripetal force"]
+        },
+        {
+          "name": "Laws of Motion",
+          "weightage": "5-6%",
+          "introduction": "Newton's laws of motion and their applications in solving dynamics problems.",
+          "keywords": ["newton's laws", "force", "inertia", "momentum", "friction"]
+        },
+        {
+          "name": "Work, Energy and Power",
+          "weightage": "4-5%",
+          "introduction": "Concepts of work, kinetic energy, potential energy, and power in mechanical systems.",
+          "keywords": ["work", "energy", "power", "kinetic", "potential", "conservation"]
+        },
+        {
+          "name": "System of Particles and Rotational Motion",
+          "weightage": "4-5%",
+          "introduction": "Center of mass, rotational kinematics and dynamics, moment of inertia, and angular momentum.",
+          "keywords": ["center of mass", "rotation", "moment of inertia", "angular momentum", "torque"]
+        },
+        {
+          "name": "Gravitation",
+          "weightage": "3-4%",
+          "introduction": "Universal law of gravitation, gravitational field, potential, and planetary motion.",
+          "keywords": ["gravitation", "gravitational field", "potential", "satellites", "escape velocity"]
+        },
+        {
+          "name": "Mechanical Properties of Solids",
+          "weightage": "2-3%",
+          "introduction": "Elastic behavior of solids, stress, strain, and Hooke's law.",
+          "keywords": ["elasticity", "stress", "strain", "hooke's law", "modulus"]
+        },
+        {
+          "name": "Mechanical Properties of Fluids",
+          "weightage": "3-4%",
+          "introduction": "Pressure, Pascal's law, Archimedes' principle, and fluid dynamics.",
+          "keywords": ["pressure", "pascal's law", "archimedes", "viscosity", "bernoulli"]
+        },
+        {
+          "name": "Thermal Properties of Matter",
+          "weightage": "3-4%",
+          "introduction": "Heat, temperature, thermal expansion, and heat transfer mechanisms.",
+          "keywords": ["heat", "temperature", "thermal expansion", "conduction", "convection"]
+        },
+        {
+          "name": "Thermodynamics",
+          "weightage": "4-5%",
+          "introduction": "Laws of thermodynamics, heat engines, and entropy.",
+          "keywords": ["thermodynamics", "heat engine", "entropy", "carnot cycle", "efficiency"]
+        },
+        {
+          "name": "Kinetic Theory",
+          "weightage": "2-3%",
+          "introduction": "Molecular theory of gases, kinetic energy, and gas laws.",
+          "keywords": ["kinetic theory", "gas laws", "molecular motion", "maxwell distribution"]
+        },
+        {
+          "name": "Oscillations",
+          "weightage": "3-4%",
+          "introduction": "Simple harmonic motion, damped and forced oscillations.",
+          "keywords": ["oscillation", "simple harmonic motion", "damping", "resonance", "frequency"]
+        },
+        {
+          "name": "Waves",
+          "weightage": "4-5%",
+          "introduction": "Wave motion, sound waves, and wave properties.",
+          "keywords": ["waves", "sound", "frequency", "amplitude", "interference", "doppler effect"]
+        },
+        {
+          "name": "Electric Charges and Fields",
+          "weightage": "4-5%",
+          "introduction": "Electric charge, Coulomb's law, electric field, and electric flux.",
+          "keywords": ["electric charge", "coulomb's law", "electric field", "electric flux", "gauss law"]
+        },
+        {
+          "name": "Electrostatic Potential and Capacitance",
+          "weightage": "4-5%",
+          "introduction": "Electric potential, equipotential surfaces, and capacitors.",
+          "keywords": ["electric potential", "capacitance", "equipotential", "energy", "dielectric"]
+        },
+        {
+          "name": "Current Electricity",
+          "weightage": "5-6%",
+          "introduction": "Electric current, resistance, Ohm's law, and electrical circuits.",
+          "keywords": ["current", "resistance", "ohm's law", "circuits", "kirchhoff's laws"]
+        },
+        {
+          "name": "Moving Charges and Magnetism",
+          "weightage": "4-5%",
+          "introduction": "Magnetic field due to current, force on moving charges, and Biot-Savart law.",
+          "keywords": ["magnetic field", "biot-savart law", "ampere's law", "force on conductor"]
+        },
+        {
+          "name": "Magnetism and Matter",
+          "weightage": "3-4%",
+          "introduction": "Magnetic properties of materials, magnetic dipole, and Earth's magnetism.",
+          "keywords": ["magnetism", "magnetic dipole", "earth's magnetism", "magnetic materials"]
+        },
+        {
+          "name": "Electromagnetic Induction",
+          "weightage": "4-5%",
+          "introduction": "Faraday's laws, Lenz's law, and electromagnetic induction.",
+          "keywords": ["electromagnetic induction", "faraday's law", "lenz's law", "self inductance"]
+        },
+        {
+          "name": "Alternating Current",
+          "weightage": "3-4%",
+          "introduction": "AC circuits, phasors, and electrical power in AC circuits.",
+          "keywords": ["alternating current", "phasors", "impedance", "resonance", "power factor"]
+        },
+        {
+          "name": "Ray Optics and Optical Instruments",
+          "weightage": "4-5%",
+          "introduction": "Reflection, refraction, lenses, and optical instruments.",
+          "keywords": ["ray optics", "reflection", "refraction", "lenses", "mirrors", "optical instruments"]
+        },
+        {
+          "name": "Wave Optics",
+          "weightage": "3-4%",
+          "introduction": "Interference, diffraction, and polarization of light.",
+          "keywords": ["wave optics", "interference", "diffraction", "polarization", "young's experiment"]
+        },
+        {
+          "name": "Dual Nature of Radiation and Matter",
+          "weightage": "3-4%",
+          "introduction": "Photoelectric effect, de Broglie wavelength, and wave-particle duality.",
+          "keywords": ["photoelectric effect", "de broglie wavelength", "wave-particle duality", "compton effect"]
+        },
+        {
+          "name": "Atoms",
+          "weightage": "2-3%",
+          "introduction": "Atomic models, Bohr's theory, and atomic spectra.",
+          "keywords": ["atomic models", "bohr's theory", "atomic spectra", "hydrogen atom"]
+        },
+        {
+          "name": "Nuclei",
+          "weightage": "3-4%",
+          "introduction": "Nuclear structure, radioactivity, and nuclear reactions.",
+          "keywords": ["nuclei", "radioactivity", "nuclear reactions", "binding energy", "fission", "fusion"]
+        },
+        {
+          "name": "Semiconductor Electronics",
+          "weightage": "3-4%",
+          "introduction": "Semiconductors, diodes, transistors, and digital electronics.",
+          "keywords": ["semiconductor", "diode", "transistor", "digital electronics", "logic gates"]
+        }
+      ]
+    },
+    "Chemistry": {
+      "chapters": [
+        {
+          "name": "Some Basic Concepts of Chemistry",
+          "weightage": "3-4%",
+          "introduction": "Fundamental concepts including matter, atoms, molecules, stoichiometry, and chemical calculations.",
+          "keywords": ["matter", "atoms", "molecules", "stoichiometry", "mole concept"]
+        },
+        {
+          "name": "Structure of Atom",
+          "weightage": "3-4%",
+          "introduction": "Atomic models, electronic configuration, quantum numbers, and periodic properties.",
+          "keywords": ["atomic structure", "quantum numbers", "electronic configuration", "periodic properties"]
+        },
+        {
+          "name": "Classification of Elements and Periodicity in Properties",
+          "weightage": "2-3%",
+          "introduction": "Periodic table, periodic trends, and properties of elements.",
+          "keywords": ["periodic table", "periodic trends", "atomic radius", "ionization energy"]
+        },
+        {
+          "name": "Chemical Bonding and Molecular Structure",
+          "weightage": "4-5%",
+          "introduction": "Ionic and covalent bonding, VSEPR theory, and molecular geometry.",
+          "keywords": ["chemical bonding", "ionic", "covalent", "VSEPR", "molecular geometry"]
+        },
+        {
+          "name": "States of Matter",
+          "weightage": "2-3%",
+          "introduction": "Gaseous state, liquid state, and solid state properties.",
+          "keywords": ["states of matter", "gas laws", "liquid", "solid", "phase transitions"]
+        },
+        {
+          "name": "Thermodynamics",
+          "weightage": "4-5%",
+          "introduction": "Laws of thermodynamics, enthalpy, entropy, and Gibbs free energy.",
+          "keywords": ["thermodynamics", "enthalpy", "entropy", "gibbs free energy", "spontaneity"]
+        },
+        {
+          "name": "Equilibrium",
+          "weightage": "4-5%",
+          "introduction": "Chemical equilibrium, ionic equilibrium, and acid-base concepts.",
+          "keywords": ["equilibrium", "le chatelier", "acid-base", "buffer", "pH"]
+        },
+        {
+          "name": "Redox Reactions",
+          "weightage": "2-3%",
+          "introduction": "Oxidation-reduction reactions, balancing redox equations, and electrochemical cells.",
+          "keywords": ["redox", "oxidation", "reduction", "balancing", "electrochemical"]
+        },
+        {
+          "name": "Hydrogen",
+          "weightage": "1-2%",
+          "introduction": "Properties, preparation, and compounds of hydrogen.",
+          "keywords": ["hydrogen", "preparation", "properties", "compounds", "water"]
+        },
+        {
+          "name": "s-Block Elements",
+          "weightage": "2-3%",
+          "introduction": "Alkali and alkaline earth metals, their properties and compounds.",
+          "keywords": ["alkali metals", "alkaline earth", "properties", "compounds", "reactivity"]
+        },
+        {
+          "name": "p-Block Elements",
+          "weightage": "4-5%",
+          "introduction": "Group 13-18 elements, their properties, and important compounds.",
+          "keywords": ["p-block", "boron", "carbon", "nitrogen", "oxygen", "halogens"]
+        },
+        {
+          "name": "Organic Chemistry – Some Basic Principles and Techniques",
+          "weightage": "4-5%",
+          "introduction": "IUPAC nomenclature, isomerism, electronic effects, and reaction mechanisms.",
+          "keywords": ["organic chemistry", "nomenclature", "isomerism", "electronic effects", "mechanisms"]
+        },
+        {
+          "name": "Hydrocarbons",
+          "weightage": "3-4%",
+          "introduction": "Alkanes, alkenes, alkynes, and aromatic hydrocarbons.",
+          "keywords": ["hydrocarbons", "alkanes", "alkenes", "alkynes", "aromatic"]
+        },
+        {
+          "name": "Environmental Chemistry",
+          "weightage": "1-2%",
+          "introduction": "Environmental pollution, green chemistry, and sustainable development.",
+          "keywords": ["environmental", "pollution", "green chemistry", "sustainable development"]
+        },
+        {
+          "name": "Solid State",
+          "weightage": "2-3%",
+          "introduction": "Crystalline and amorphous solids, unit cells, and crystal structures.",
+          "keywords": ["solid state", "crystalline", "amorphous", "unit cell", "crystal structure"]
+        },
+        {
+          "name": "Solutions",
+          "weightage": "3-4%",
+          "introduction": "Types of solutions, concentration units, and colligative properties.",
+          "keywords": ["solutions", "concentration", "colligative properties", "osmosis", "vapor pressure"]
+        },
+        {
+          "name": "Electrochemistry",
+          "weightage": "3-4%",
+          "introduction": "Conductance, electrolysis, and electrochemical cells.",
+          "keywords": ["electrochemistry", "conductance", "electrolysis", "electrochemical cells"]
+        },
+        {
+          "name": "Chemical Kinetics",
+          "weightage": "3-4%",
+          "introduction": "Rate of reaction, factors affecting rate, and reaction mechanisms.",
+          "keywords": ["chemical kinetics", "reaction rate", "mechanism", "catalyst", "activation energy"]
+        },
+        {
+          "name": "Surface Chemistry",
+          "weightage": "1-2%",
+          "introduction": "Adsorption, catalysis, and colloids.",
+          "keywords": ["surface chemistry", "adsorption", "catalysis", "colloids"]
+        },
+        {
+          "name": "General Principles and Processes of Isolation of Elements",
+          "weightage": "1-2%",
+          "introduction": "Metallurgy and extraction of metals.",
+          "keywords": ["metallurgy", "extraction", "ores", "refining", "purification"]
+        },
+        {
+          "name": "d and f Block Elements",
+          "weightage": "3-4%",
+          "introduction": "Transition elements, lanthanides, and actinides.",
+          "keywords": ["transition elements", "lanthanides", "actinides", "coordination compounds"]
+        },
+        {
+          "name": "Coordination Compounds",
+          "weightage": "3-4%",
+          "introduction": "Werner's theory, nomenclature, and properties of coordination compounds.",
+          "keywords": ["coordination compounds", "werner's theory", "ligands", "isomerism"]
+        },
+        {
+          "name": "Haloalkanes and Haloarenes",
+          "weightage": "2-3%",
+          "introduction": "Preparation, properties, and reactions of alkyl and aryl halides.",
+          "keywords": ["haloalkanes", "haloarenes", "preparation", "properties", "reactions"]
+        },
+        {
+          "name": "Alcohols, Phenols and Ethers",
+          "weightage": "3-4%",
+          "introduction": "Preparation, properties, and reactions of alcohols, phenols, and ethers.",
+          "keywords": ["alcohols", "phenols", "ethers", "preparation", "properties", "reactions"]
+        },
+        {
+          "name": "Aldehydes, Ketones and Carboxylic Acids",
+          "weightage": "4-5%",
+          "introduction": "Preparation, properties, and reactions of carbonyl compounds and carboxylic acids.",
+          "keywords": ["aldehydes", "ketones", "carboxylic acids", "carbonyl compounds", "reactions"]
+        },
+        {
+          "name": "Amines",
+          "weightage": "2-3%",
+          "introduction": "Preparation, properties, and reactions of amines.",
+          "keywords": ["amines", "preparation", "properties", "reactions", "basicity"]
+        },
+        {
+          "name": "Biomolecules",
+          "weightage": "3-4%",
+          "introduction": "Carbohydrates, proteins, nucleic acids, and lipids.",
+          "keywords": ["biomolecules", "carbohydrates", "proteins", "nucleic acids", "lipids"]
+        },
+        {
+          "name": "Polymers",
+          "weightage": "1-2%",
+          "introduction": "Classification, preparation, and properties of polymers.",
+          "keywords": ["polymers", "classification", "preparation", "properties", "biodegradable"]
+        },
+        {
+          "name": "Chemistry in Everyday Life",
+          "weightage": "1-2%",
+          "introduction": "Drugs, medicines, food additives, and cleaning agents.",
+          "keywords": ["drugs", "medicines", "food additives", "cleaning agents", "soaps"]
+        }
+      ]
+    },
+    "Biology": {
+      "chapters": [
+        {
+          "name": "The Living World",
+          "weightage": "1-2%",
+          "introduction": "Characteristics of living organisms, taxonomy, and classification systems.",
+          "keywords": ["living world", "taxonomy", "classification", "nomenclature", "biodiversity"]
+        },
+        {
+          "name": "Biological Classification",
+          "weightage": "2-3%",
+          "introduction": "Five kingdom classification, viruses, and classification of organisms.",
+          "keywords": ["biological classification", "five kingdom", "viruses", "monera", "protista"]
+        },
+        {
+          "name": "Plant Kingdom",
+          "weightage": "2-3%",
+          "introduction": "Classification of plants, algae, bryophytes, pteridophytes, gymnosperms, and angiosperms.",
+          "keywords": ["plant kingdom", "algae", "bryophytes", "pteridophytes", "gymnosperms", "angiosperms"]
+        },
+        {
+          "name": "Animal Kingdom",
+          "weightage": "3-4%",
+          "introduction": "Classification of animals based on body plan, symmetry, and coelom.",
+          "keywords": ["animal kingdom", "classification", "symmetry", "coelom", "phylum"]
+        },
+        {
+          "name": "Morphology of Flowering Plants",
+          "weightage": "3-4%",
+          "introduction": "Root, stem, leaf, flower, fruit, and seed morphology in flowering plants.",
+          "keywords": ["morphology", "root", "stem", "leaf", "flower", "fruit", "seed"]
+        },
+        {
+          "name": "Anatomy of Flowering Plants",
+          "weightage": "2-3%",
+          "introduction": "Tissue systems, tissue types, and internal structure of plant organs.",
+          "keywords": ["anatomy", "tissue systems", "meristematic", "permanent tissues", "vascular bundles"]
+        },
+        {
+          "name": "Structural Organisation in Animals",
+          "weightage": "2-3%",
+          "introduction": "Animal tissues, organ systems, and structural organization.",
+          "keywords": ["structural organisation", "tissues", "epithelial", "connective", "muscular", "nervous"]
+        },
+        {
+          "name": "Cell: The Unit of Life",
+          "weightage": "3-4%",
+          "introduction": "Cell theory, prokaryotic and eukaryotic cells, and cell organelles.",
+          "keywords": ["cell theory", "prokaryotic", "eukaryotic", "organelles", "cell membrane"]
+        },
+        {
+          "name": "Biomolecules",
+          "weightage": "3-4%",
+          "introduction": "Carbohydrates, proteins, lipids, nucleic acids, and enzymes.",
+          "keywords": ["biomolecules", "carbohydrates", "proteins", "lipids", "nucleic acids", "enzymes"]
+        },
+        {
+          "name": "Cell Cycle and Cell Division",
+          "weightage": "2-3%",
+          "introduction": "Cell cycle phases, mitosis, and meiosis.",
+          "keywords": ["cell cycle", "mitosis", "meiosis", "interphase", "cytokinesis"]
+        },
+        {
+          "name": "Transport in Plants",
+          "weightage": "2-3%",
+          "introduction": "Means of transport, plant-water relations, and translocation.",
+          "keywords": ["transport", "diffusion", "osmosis", "transpiration", "translocation"]
+        },
+        {
+          "name": "Mineral Nutrition",
+          "weightage": "1-2%",
+          "introduction": "Essential minerals, deficiency symptoms, and nitrogen metabolism.",
+          "keywords": ["mineral nutrition", "essential minerals", "deficiency", "nitrogen metabolism"]
+        },
+        {
+          "name": "Photosynthesis in Higher Plants",
+          "weightage": "3-4%",
+          "introduction": "Light and dark reactions, C3 and C4 pathways, and photorespiration.",
+          "keywords": ["photosynthesis", "light reaction", "dark reaction", "C3", "C4", "photorespiration"]
+        },
+        {
+          "name": "Respiration in Plants",
+          "weightage": "2-3%",
+          "introduction": "Glycolysis, Krebs cycle, electron transport chain, and fermentation.",
+          "keywords": ["respiration", "glycolysis", "krebs cycle", "electron transport", "fermentation"]
+        },
+        {
+          "name": "Plant Growth and Development",
+          "weightage": "2-3%",
+          "introduction": "Plant hormones, photoperiodism, and vernalization.",
+          "keywords": ["plant growth", "hormones", "auxin", "cytokinin", "photoperiodism", "vernalization"]
+        },
+        {
+          "name": "Digestion and Absorption",
+          "weightage": "2-3%",
+          "introduction": "Digestive system, digestive processes, and absorption of nutrients.",
+          "keywords": ["digestion", "absorption", "alimentary canal", "enzymes", "nutrients"]
+        },
+        {
+          "name": "Breathing and Exchange of Gases",
+          "weightage": "2-3%",
+          "introduction": "Respiratory system, mechanism of breathing, and gas exchange.",
+          "keywords": ["breathing", "respiration", "gas exchange", "lungs", "hemoglobin"]
+        },
+        {
+          "name": "Body Fluids and Circulation",
+          "weightage": "3-4%",
+          "introduction": "Blood, lymph, circulatory system, and cardiac cycle.",
+          "keywords": ["body fluids", "blood", "lymph", "circulation", "cardiac cycle", "heart"]
+        },
+        {
+          "name": "Excretory Products and their Elimination",
+          "weightage": "2-3%",
+          "introduction": "Excretory system, urine formation, and osmoregulation.",
+          "keywords": ["excretion", "kidney", "urine formation", "osmoregulation", "nephron"]
+        },
+        {
+          "name": "Locomotion and Movement",
+          "weightage": "2-3%",
+          "introduction": "Types of movement, skeletal system, and muscle contraction.",
+          "keywords": ["locomotion", "movement", "skeletal system", "muscle contraction", "joints"]
+        },
+        {
+          "name": "Neural Control and Coordination",
+          "weightage": "3-4%",
+          "introduction": "Nervous system, nerve impulse, and reflex action.",
+          "keywords": ["neural control", "nervous system", "nerve impulse", "reflex action", "synapse"]
+        },
+        {
+          "name": "Chemical Coordination and Integration",
+          "weightage": "3-4%",
+          "introduction": "Endocrine system, hormones, and their functions.",
+          "keywords": ["endocrine system", "hormones", "pituitary", "thyroid", "adrenal", "pancreas"]
+        },
+        {
+          "name": "Reproduction in Organisms",
+          "weightage": "1-2%",
+          "introduction": "Asexual and sexual reproduction, life cycles, and reproductive strategies.",
+          "keywords": ["reproduction", "asexual", "sexual", "life cycles", "gametogenesis"]
+        },
+        {
+          "name": "Sexual Reproduction in Flowering Plants",
+          "weightage": "3-4%",
+          "introduction": "Flower structure, pollination, fertilization, and seed formation.",
+          "keywords": ["sexual reproduction", "flower", "pollination", "fertilization", "seed formation"]
+        },
+        {
+          "name": "Human Reproduction",
+          "weightage": "3-4%",
+          "introduction": "Male and female reproductive systems, gametogenesis, and pregnancy.",
+          "keywords": ["human reproduction", "reproductive system", "gametogenesis", "pregnancy", "menstrual cycle"]
+        },
+        {
+          "name": "Reproductive Health",
+          "weightage": "2-3%",
+          "introduction": "Population control, contraception, and sexually transmitted diseases.",
+          "keywords": ["reproductive health", "contraception", "STDs", "population control", "family planning"]
+        },
+        {
+          "name": "Principles of Inheritance and Variation",
+          "weightage": "4-5%",
+          "introduction": "Mendel's laws, inheritance patterns, and genetic disorders.",
+          "keywords": ["inheritance", "mendel's laws", "genetics", "genetic disorders", "linkage"]
+        },
+        {
+          "name": "Molecular Basis of Inheritance",
+          "weightage": "4-5%",
+          "introduction": "DNA structure, replication, transcription, and translation.",
+          "keywords": ["DNA", "replication", "transcription", "translation", "genetic code", "mutation"]
+        },
+        {
+          "name": "Evolution",
+          "weightage": "2-3%",
+          "introduction": "Origin of life, theories of evolution, and evidence for evolution.",
+          "keywords": ["evolution", "origin of life", "natural selection", "adaptation", "speciation"]
+        },
+        {
+          "name": "Human Health and Disease",
+          "weightage": "3-4%",
+          "introduction": "Common diseases, immunity, and health maintenance.",
+          "keywords": ["human health", "diseases", "immunity", "pathogens", "vaccination"]
+        },
+        {
+          "name": "Strategies for Enhancement in Food Production",
+          "weightage": "1-2%",
+          "introduction": "Animal husbandry, plant breeding, and tissue culture.",
+          "keywords": ["food production", "animal husbandry", "plant breeding", "tissue culture", "hybridization"]
+        },
+        {
+          "name": "Microbes in Human Welfare",
+          "weightage": "1-2%",
+          "introduction": "Microbes in food production, medicine, and environmental management.",
+          "keywords": ["microbes", "food production", "medicine", "biotechnology", "environmental management"]
+        },
+        {
+          "name": "Biotechnology: Principles and Processes",
+          "weightage": "2-3%",
+          "introduction": "Genetic engineering, recombinant DNA technology, and cloning vectors.",
+          "keywords": ["biotechnology", "genetic engineering", "recombinant DNA", "cloning", "vectors"]
+        },
+        {
+          "name": "Biotechnology and its Applications",
+          "weightage": "2-3%",
+          "introduction": "Applications in medicine, agriculture, and industry.",
+          "keywords": ["biotechnology applications", "medicine", "agriculture", "industry", "transgenic"]
+        },
+        {
+          "name": "Organisms and Populations",
+          "weightage": "2-3%",
+          "introduction": "Ecology, population dynamics, and species interactions.",
+          "keywords": ["ecology", "populations", "community", "ecosystem", "biodiversity"]
+        },
+        {
+          "name": "Ecosystem",
+          "weightage": "2-3%",
+          "introduction": "Ecosystem structure, energy flow, and nutrient cycling.",
+          "keywords": ["ecosystem", "energy flow", "nutrient cycling", "food chain", "ecological pyramids"]
+        },
+        {
+          "name": "Biodiversity and Conservation",
+          "weightage": "1-2%",
+          "introduction": "Biodiversity patterns, threats, and conservation strategies.",
+          "keywords": ["biodiversity", "conservation", "threats", "endangered species", "protected areas"]
+        },
+        {
+          "name": "Environmental Issues",
+          "weightage": "1-2%",
+          "introduction": "Pollution, global warming, ozone depletion, and waste management.",
+          "keywords": ["environmental issues", "pollution", "global warming", "ozone depletion", "waste management"]
+        }
+      ]
+    }
+  }
+}

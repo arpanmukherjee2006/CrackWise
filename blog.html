@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - CrackWise</title>
+    <meta name="description" content="Explore the latest articles, tips, and strategies for JEE and NEET exam preparation on the CrackWise blog." />
+    <link rel="canonical" href="blog.html" />
+    <meta property="og:title" content="Blog - CrackWise" />
+    <meta property="og:description" content="Discover expert tips and strategies for JEE and NEET exam preparation on the CrackWise blog." />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="index,follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+      /* Blog specific styles */
+      .page-hero {
+        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        color: white;
+        padding: 21px 24px;
+        text-align: center;
+        border-radius: 0 0 30px 30px;
+        margin-bottom: 60px;
+        box-shadow: var(--shadow);
+        width: 100%;
+        min-height: 30vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .page-hero h1 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        font-weight: 800;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      .page-hero p {
+        font-size: 1.4rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+      
+      @media (min-width: 992px) {
+        .page-hero {
+          padding: 150px 24px;
+          min-height: 47vh;
+        }
+        
+        .page-hero h1 {
+          font-size: 4rem;
+        }
+        
+        .page-hero p {
+          font-size: 1.6rem;
+        }
+      }
+      
+      .blog-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      .blog-post {
+        background: var(--bg-card);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid var(--border);
+      }
+      
+      .blog-post:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+        border-color: var(--primary-light);
+      }
+      
+      .blog-post.featured {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      
+      @media (min-width: 768px) {
+        .blog-post.featured {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      
+      .blog-image {
+        height: 240px;
+        overflow: hidden;
+      }
+      
+      .blog-post.featured .blog-image {
+        height: 100%;
+      }
+      
+      .blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      
+      .blog-post:hover .blog-image img {
+        transform: scale(1.05);
+      }
+      
+      .blog-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      
+      .blog-meta {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+        font-size: 14px;
+      }
+      
+      .blog-category {
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+      
+      .blog-date {
+        color: var(--text-secondary);
+      }
+      
+      .blog-title {
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+      
+      .blog-post.featured .blog-title {
+        font-size: 1.8rem;
+      }
+      
+      .blog-title a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      
+      .blog-title a:hover {
+        color: var(--primary);
+      }
+      
+      .blog-excerpt {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        line-height: 1.6;
+        flex-grow: 1;
+      }
+      
+      .blog-author {
+        margin-bottom: 20px;
+        font-weight: 500;
+        color: var(--text-secondary);
+      }
+      
+      .btn.secondary {
+        align-self: flex-start;
+        background: var(--primary-light);
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      
+      .btn.secondary:hover {
+        background: var(--primary);
+        color: white;
+      }
+      
+      @media (min-width: 768px) {
+        .blog-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .page-hero {
+          padding: 30px 24px;
+        }
+      }
+      
+      @media (min-width: 992px) {
+        .blog-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .page-hero h1 {
+          font-size: 2.2rem;
+        }
+      }
+      
+      /* Pagination Styles */
+      .pagination-container {
+        width: 100%;
+        padding: 60px 24px;
+        background-color: var(--bg);
+      }
+      
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      
+      .current-page {
+        margin-right: 16px;
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+      }
+      
+      .page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--bg-card);
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow-sm);
+      }
+      
+      .page-link:hover {
+        background: var(--primary-light);
+        color: var(--primary);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+      }
+      
+      .page-link.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+      }
+      
+      .page-link.next {
+        width: auto;
+        padding: 0 20px;
+        border-radius: 25px;
+      }
+      
+      @media (min-width: 768px) {
+        .pagination-container {
+          padding: 80px 24px;
+        }
+        
+        .page-link {
+          width: 50px;
+          height: 50px;
+          font-size: 1.2rem;
+        }
+      }
+      
+     
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <a class="brand" href="index.html">CrackWise</a>
+      </div>
+      <div class="nav-right">
+        <a class="nav-link" href="study.html">Study</a>
+        <a class="nav-link" href="blog.html">Blog</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+    </header>
+
+    <section class="page-hero">
+      <h1>CrackWise Blog</h1>
+      <p>Expert tips, strategies, and insights for JEE and NEET aspirants</p>
+    </section>
+
+    <main class="container" style="max-width:1200px; padding:40px 24px;">
+      <div class="blog-grid">
+        <!-- Featured Blog Post -->
+        <div class="blog-post featured">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category">Strategy</span>
+              <span class="blog-date">June 15, 2023</span>
+            </div>
+            <h2 class="blog-title"><a href="blog-post-jee-neet-2026-strategy.html">JEE/NEET 2026: Your 6-Month Preparation Strategy</a></h2>
+            <p class="blog-excerpt">With just 6 months left for JEE/NEET 2026, it's time to optimize your preparation strategy. This comprehensive guide breaks down month-by-month what you should focus on, high-yield topics, and smart study techniques to maximize your score.</p>
+            <div class="blog-author">
+              <span class="author-name">By Arpan Mukherjee</span>
+            </div>
+            <a href="blog-post-jee-neet-2026-strategy.html" class="btn secondary">Read More</a>
+          </div>
+        </div>
+
+        <!-- Placeholder for future blog posts
+        <div class="blog-post">
+          <div class="blog-image">
+            <img src="images/blog-placeholder.jpg" alt="Physics Concepts for JEE" loading="lazy">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category">Physics</span>
+              <span class="blog-date">Coming Soon</span>
+            </div>
+            <h2 class="blog-title"><a href="#">Top 10 Physics Concepts Every JEE Aspirant Must Master</a></h2>
+            <p class="blog-excerpt">Master these fundamental physics concepts to ace the JEE examination. We break down complex topics into easy-to-understand explanations with practical examples.</p>
+            <div class="blog-author">
+              <span class="author-name">By Prof. Amit Verma</span>
+            </div>
+            <a href="#" class="btn secondary">Coming Soon</a>
+          </div>
+        </div>
+
+        <div class="blog-post">
+          <div class="blog-image">
+            <img src="images/blog-placeholder.jpg" alt="NEET Biology Memory Techniques" loading="lazy">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category">Biology</span>
+              <span class="blog-date">Coming Soon</span>
+            </div>
+            <h2 class="blog-title"><a href="#">NEET Biology: Memory Techniques for Taxonomic Classifications</a></h2>
+            <p class="blog-excerpt">Struggling with biological classifications? Learn powerful memory techniques specifically designed for NEET aspirants to master taxonomy and classification systems.</p>
+            <div class="blog-author">
+              <span class="author-name">By Dr. Priya Patel</span>
+            </div>
+            <a href="#" class="btn secondary">Coming Soon</a>
+          </div>
+        </div>
+
+        <div class="blog-post">
+          <div class="blog-image">
+            <img src="images/blog-placeholder.jpg" alt="Integration Problems" loading="lazy">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category">Mathematics</span>
+              <span class="blog-date">Coming Soon</span>
+            </div>
+            <h2 class="blog-title"><a href="#">How to Solve Complex Integration Problems in Under 2 Minutes</a></h2>
+            <p class="blog-excerpt">Time-saving techniques for solving even the most challenging integration problems quickly and accurately. Perfect for JEE Advanced preparation.</p>
+            <div class="blog-author">
+              <span class="author-name">By Prof. Sanjay Gupta</span>
+            </div>
+            <a href="#" class="btn secondary">Coming Soon</a>
+          </div>
+        </div> -->
+      </div>
+
+    
+
+  </main>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4 class="footer-heading">Quick Links</h4>
+              <ul class="footer-list">
+                <li><a href="index.html" class="footer-link">Home</a></li>
+                <li><a href="study.html" class="footer-link">Study</a></li>
+                <li><a href="blog.html" class="footer-link">Blog</a></li>
+                <li><a href="about.html" class="footer-link">About</a></li>
+              </ul>
+            </div>
+            
+            <div class="footer-column">
+              <h4 class="footer-heading">Support</h4>
+              <ul class="footer-list">
+                <li><a href="contact.html" class="footer-link">Contact Us</a></li>
+                <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank" class="footer-link">Community</a></li>
+              </ul>
+            </div>
+            
+            <div class="footer-column">
+              <h4 class="footer-heading">Company</h4>
+              <ul class="footer-list">
+                <li><a href="about.html" class="footer-link">About Us</a></li>
+                <li><a href="blog.html" class="footer-link">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="footer-bottom-content">
+            <p class="copyright">© <span id="year"></span> CrackWise. All rights reserved. Built with ❤️ for Students.</p>
+            <div class="footer-badges">
+              <span class="footer-badge">🔒 Secure</span>
+              <span class="footer-badge">📱 Mobile First</span>
+              <span class="footer-badge">⚡ Fast</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

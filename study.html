@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials - CrackWise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="study-styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Loading Study Materials...</p>
+    </div>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a class="brand" href="index.html">CrackWise</a>
+        </div>
+        <div class="nav-center">
+            <input id="search-input" class="search" type="text" placeholder="Search chapters..." aria-label="Search chapters" />
+        </div>
+        <div class="nav-right">
+            <button id="mobile-search-btn" class="icon-btn show-sm" aria-label="Open search" title="Search">🔍</button>
+            <div id="user-menu" class="user-menu">
+                <div class="profile-dropdown">
+                    <button id="profile-btn" class="profile-btn" aria-label="User profile menu">
+                        <div class="profile-avatar">
+                            <span id="user-initial">U</span>
+                        </div>
+                        <span id="user-greeting" class="user-greeting"></span>
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 8L2 4h8L6 8z"/>
+                        </svg>
+                    </button>
+                    <div id="profile-dropdown" class="profile-dropdown-menu hidden">
+                        <button id="logout-btn" class="dropdown-item logout-item">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
+                            </svg>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-search" class="mobile-search hidden">
+        <input id="search-input-mobile" class="search" type="text" placeholder="Search chapters..." aria-label="Search chapters" />
+    </div>
+
+    <main class="study-main">
+        <!-- Subject Selection -->
+        <div class="subject-selector">
+            <div class="subject-tabs">
+                <button class="subject-tab active" data-subject="physics">📚 Physics</button>
+                <button class="subject-tab" data-subject="chemistry">🧪 Chemistry</button>
+                <button class="subject-tab" data-subject="mathematics" id="math-tab">📐 Mathematics</button>
+            </div>
+        </div>
+
+        <!-- Study Navigation -->
+        <nav class="study-nav">
+            <div class="nav-header">
+                <h2 id="subject-title">Physics Chapters</h2>
+                <div class="progress-indicator">
+                    <span id="completed-count">0</span>/<span id="total-count">6</span> Complete
+                </div>
+            </div>
+            <ul class="chapter-list" id="chapter-list">
+                <!-- Chapters will be dynamically loaded based on selected subject -->
+            </ul>
+        </nav>
+
+        <!-- Study Content -->
+        <div class="study-content">
+            <div class="content-header">
+                <h1 id="chapter-title">Select a Chapter</h1>
+                <div class="content-tabs">
+                    <button class="tab-btn active" data-tab="explanation">📚 Explanation</button>
+                    <button class="tab-btn" data-tab="formulas">📐 Formulas</button>
+                    <button class="tab-btn" data-tab="quiz">🧠 Problems</button>
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <!-- Explanation Tab -->
+                <div id="explanation-tab" class="tab-panel active">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">📖</div>
+                        <h2>Welcome to JEE Physics Study</h2>
+                        <p>Select a chapter from the left sidebar to start studying. Each chapter includes detailed explanations, key formulas, and practice questions.</p>
+                        <div class="study-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✨</span>
+                                <span>Comprehensive explanations with examples</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📊</span>
+                                <span>All important formulas organized</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🎯</span>
+                                <span>practice questions per chapter</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📈</span>
+                                <span>Progress tracking and analytics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulas Tab -->
+                <div id="formulas-tab" class="tab-panel">
+                    <div class="formulas-content">
+                        <p class="tab-instruction">Select a chapter to view its formulas</p>
+                    </div>
+                </div>
+
+                <!-- Quiz Tab -->
+                <div id="quiz-tab" class="tab-panel">
+                    <div class="quiz-content">
+                        <p class="tab-instruction">Select a chapter to take its quiz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+    <script src="config.js" defer></script>
+    <script src="study-data.js" defer></script>
+    <script src="chemistry-data.js" defer></script>
+    <script src="mathematics-data.js" defer></script>
+    <script src="neet-physics-data.js" defer></script>
+    <script src="neet-chemistry-data.js" defer></script>
+    <script src="neet-biology-data.js" defer></script>
+    <script src="study-script.js" defer></script>
+</body>
+</html>

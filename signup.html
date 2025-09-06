@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create your account – CrackWise</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  </head>
+  <body class="centered">
+    <header class="navbar">
+      <div class="nav-left">
+        <a class="brand" href="index.html">CrackWise</a>
+      </div>
+      <div class="nav-right">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <main class="auth-page">
+      <section class="card">
+        <h1>Create your account</h1>
+        <p class="muted">Study Less, Score More – focus on high-weightage topics only.</p>
+
+        <form id="signup-form" class="form" novalidate>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="Create a password" minlength="6" required />
+          </div>
+
+          <fieldset class="field">
+            <legend>Select Exam</legend>
+            <div class="radio-row">
+              <label class="radio">
+                <input type="radio" name="exam" value="JEE" required />
+                <span>JEE</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="exam" value="NEET" />
+                <span>NEET</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn primary full">Create Account</button>
+          <p class="help-text">Already have an account? <a href="index.html">Login</a></p>
+          <p id="signup-error" class="form-error" role="alert"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> CrackWise.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+    <script src="config.js" defer></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
