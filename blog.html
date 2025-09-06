@@ -20,13 +20,13 @@
       .page-hero {
         background: linear-gradient(135deg, var(--primary-light), var(--primary));
         color: white;
-        padding: 21px 24px;
+        padding: 100px 24px;
         text-align: center;
         border-radius: 0 0 30px 30px;
         margin-bottom: 60px;
         box-shadow: var(--shadow);
         width: 100%;
-        min-height: 30vh;
+        min-height: 50vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -34,7 +34,7 @@
       }
       
       .page-hero h1 {
-        font-size: 2.2rem;
+        font-size: 3.2rem;
         margin-bottom: 20px;
         font-weight: 800;
         text-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -51,7 +51,7 @@
       @media (min-width: 992px) {
         .page-hero {
           padding: 150px 24px;
-          min-height: 47vh;
+          min-height: 60vh;
         }
         
         .page-hero h1 {
@@ -202,7 +202,7 @@
         }
         
         .page-hero {
-          padding: 30px 24px;
+          padding: 80px 24px;
         }
       }
       
@@ -212,7 +212,7 @@
         }
         
         .page-hero h1 {
-          font-size: 2.2rem;
+          font-size: 3.2rem;
         }
       }
       
@@ -287,7 +287,110 @@
         }
       }
       
-     
+      /* Newsletter Section */
+      .newsletter-section {
+        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        padding: 80px 24px;
+        margin: 60px 0 0;
+        border-radius: 30px 30px 0 0;
+        color: white;
+        width: 100%;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .newsletter-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      
+      .newsletter-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+      
+      .newsletter-content p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+      }
+      
+      .newsletter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      
+      .newsletter-form input {
+        padding: 18px 20px;
+        border-radius: 12px;
+        border: none;
+        font-size: 1.1rem;
+        box-shadow: var(--shadow);
+        width: 100%;
+      }
+      
+      .newsletter-form .btn {
+        padding: 18px 20px;
+        background: white;
+        color: var(--primary);
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+      
+      .newsletter-form .btn:hover {
+        background: var(--bg);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      
+      @media (min-width: 768px) {
+        .newsletter-section {
+          padding: 100px 24px;
+          min-height: 60vh;
+        }
+        
+        .newsletter-content h2 {
+          font-size: 3rem;
+        }
+        
+        .newsletter-form {
+          flex-direction: row;
+        }
+        
+        .newsletter-form input {
+          flex: 1;
+          border-radius: 12px 0 0 12px;
+        }
+        
+        .newsletter-form .btn {
+          width: auto;
+          border-radius: 0 12px 12px 0;
+        }
+      }
+      
+      @media (min-width: 992px) {
+        .newsletter-section {
+          min-height: 70vh;
+        }
+      }
     </style>
   </head>
   <body>
@@ -312,6 +415,9 @@
       <div class="blog-grid">
         <!-- Featured Blog Post -->
         <div class="blog-post featured">
+          <div class="blog-image">
+            <img src="images/blog-jee-neet-strategy.jpg" alt="JEE/NEET 2026 Strategy" loading="lazy">
+          </div>
           <div class="blog-content">
             <div class="blog-meta">
               <span class="blog-category">Strategy</span>
@@ -320,13 +426,13 @@
             <h2 class="blog-title"><a href="blog-post-jee-neet-2026-strategy.html">JEE/NEET 2026: Your 6-Month Preparation Strategy</a></h2>
             <p class="blog-excerpt">With just 6 months left for JEE/NEET 2026, it's time to optimize your preparation strategy. This comprehensive guide breaks down month-by-month what you should focus on, high-yield topics, and smart study techniques to maximize your score.</p>
             <div class="blog-author">
-              <span class="author-name">By Arpan Mukherjee</span>
+              <span class="author-name">By Dr. Rajesh Sharma</span>
             </div>
             <a href="blog-post-jee-neet-2026-strategy.html" class="btn secondary">Read More</a>
           </div>
         </div>
 
-        <!-- Placeholder for future blog posts
+        <!-- Placeholder for future blog posts -->
         <div class="blog-post">
           <div class="blog-image">
             <img src="images/blog-placeholder.jpg" alt="Physics Concepts for JEE" loading="lazy">
@@ -379,11 +485,31 @@
             </div>
             <a href="#" class="btn secondary">Coming Soon</a>
           </div>
-        </div> -->
+        </div>
       </div>
 
-    
+    <div class="pagination-container">
+      <div class="pagination">
+        <span class="current-page">Page 1</span>
+        <a href="#" class="page-link active">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">3</a>
+        <a href="#" class="page-link next">Next &raquo;</a>
+      </div>
+    </div>
 
+    <div class="newsletter-section">
+      <div class="newsletter-container">
+        <div class="newsletter-content">
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>Get the latest JEE and NEET preparation tips, study resources, and exam updates delivered to your inbox.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" class="btn primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </main>
 
     <footer class="site-footer">
