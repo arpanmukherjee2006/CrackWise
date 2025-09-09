@@ -1413,7 +1413,7 @@
     .chapter-header-actions {
         flex-direction: column;
         gap: 20px;
-        align-items: stretch;
+        align-items: center;
         padding: 24px;
     }
     
