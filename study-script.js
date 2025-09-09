@@ -840,7 +840,7 @@
                 <div class="chapter-header-actions">
                     <div class="chapter-meta">
                         <span class="weightage-badge">${chapterData.weightage || 'Weightage not specified'} weightage</span>
-                        <span class="questions-count">50 practice questions</span>
+                        <span class="questions-count">30-40 Problems</span>
                     </div>
                     <div class="completion-actions">
                         <button id="toggle-completion" class="btn ${isCompleted ? 'success' : 'primary'} completion-btn">
