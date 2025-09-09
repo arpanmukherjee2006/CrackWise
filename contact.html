@@ -1,65 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact – CrackWise</title>
-    <meta name="description" content="Contact CrackWise for support, feedback, partnerships, or general inquiries." />
-    <link rel="canonical" href="contact.html" />
-    <meta property="og:title" content="Contact – CrackWise" />
-    <meta property="og:description" content="Get in touch with the CrackWise team for any questions or support." />
-    <meta property="og:type" content="website" />
-    <meta name="robots" content="index,follow" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - CrackWise</title>
+    <meta name="description" content="Get in touch with CrackWise for support, feedback, or general inquiries. We're here to help you succeed.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="nav-left">
-        <a class="brand" href="index.html">CrackWise</a>
-      </div>
-      <div class="nav-right">
-        <a class="nav-link" href="about.html">About</a>
-        <button id="mobile-menu-btn" class="icon-btn show-sm" aria-label="Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </header>
     
-    <div id="mobile-menu" class="mobile-menu" style="display:none;">
-      <a href="about.html">About</a>
-    </div>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="brand">CrackWise</a>
+        </div>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div id="auth-section">
+                <a href="signup.html" class="btn btn-secondary">Sign Up</a>
+                <button id="login-btn" class="btn btn-primary">Login</button>
+            </div>
+            <div id="user-section" class="hidden">
+                <div id="user-menu" class="user-menu">
+                    <div class="profile-dropdown">
+                        <button id="profile-btn" class="profile-btn" aria-label="User profile menu">
+                            <div class="profile-avatar">
+                                <span id="user-initial">U</span>
+                            </div>
+                            <span id="user-greeting" class="user-greeting"></span>
+                            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M6 8L2 4h8L6 8z"/>
+                            </svg>
+                        </button>
+                        <div id="profile-dropdown" class="profile-dropdown-menu hidden">
+                            <a href="study.html" class="dropdown-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M2 2v12h12V2H2zm2 2h8v8H4V4zm1 2h6v1H5V6zm0 2h6v1H5V8zm0 2h3v1H5v-1z"/>
+                                </svg>
+                                Study
+                            </a>
+                            <button id="set-password-btn" class="dropdown-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 1a4 4 0 0 1 4 4v2h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2h4V5a2 2 0 0 0-2-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg>
+                                Set Password
+                            </button>
+                            <button id="logout-btn" class="dropdown-item logout-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
+                                </svg>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <section class="page-hero">
-      <h1>Contact Us</h1>
-      <p>We’d love to hear from you – feedback, support, partnerships.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Get in Touch</h1>
+                <p class="hero-subtitle">
+                    Have questions, feedback, or need support? We'd love to hear from you and help you succeed.
+                </p>
+            </div>
+        </div>
     </section>
 
-    <main class="container" style="max-width:980px; padding:24px;">
-      <div class="card" style="padding:24px; max-width:600px; margin:0 auto;">
-        <h2>Reach us</h2>
-        <p style="color:var(--text-secondary)">Email: contact.crackwise@gmail.com</p>
-        <p style="color:var(--text-secondary)">Twitter: @CrackWisein</p>
-        <p style="color:var(--text-secondary)">We usually reply within 24–48 hours.</p>
-      </div>
-    </main>
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start;">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2 class="mb-6">Let's Connect</h2>
+                    <p class="mb-8 text-muted">
+                        We're here to support your learning journey. Reach out to us through any of these channels.
+                    </p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>
+                                </svg>
+                            </div>
+                            <div class="method-details">
+                                <h4>Email</h4>
+                                <p>contact.crackwise@gmail.com</p>
+                                <span class="method-note">We typically respond within 24 hours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28 9.09 5.11 7.38 3 4.79C2.63 5.42 2.42 6.16 2.42 6.94C2.42 8.43 3.17 9.75 4.33 10.5C3.62 10.5 2.96 10.3 2.38 10C2.38 10 2.38 10 2.38 10.03C2.38 12.11 3.86 13.85 5.82 14.24C5.46 14.34 5.08 14.39 4.69 14.39C4.42 14.39 4.15 14.36 3.89 14.31C4.43 16 6 17.26 7.89 17.29C6.43 18.45 4.58 19.13 2.56 19.13C2.22 19.13 1.88 19.11 1.54 19.07C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79C20.33 8.6 20.33 8.42 20.32 8.23C21.16 7.63 21.88 6.87 22.46 6Z"/>
+                                </svg>
+                            </div>
+                            <div class="method-details">
+                                <h4>Twitter</h4>
+                                <p>@CrackWisein</p>
+                                <span class="method-note">Follow us for updates and tips</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17M2 12L12 17L22 12"/>
+                                </svg>
+                            </div>
+                            <div class="method-details">
+                                <h4>Community</h4>
+                                <p>Reddit Community</p>
+                                <span class="method-note">Join discussions with fellow students</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="response-info">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Quick Response</h4>
+                                <p>We usually reply within 24-48 hours during business days.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Google Form -->
+                <div class="contact-form-container">
+                    <div class="card">
+                        <h3 class="mb-6">Send us a Message</h3>
+                        <div class="responsive-iframe-container">
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_9ItCmbrRzz1tX61wenvD3DaxSelBtVfLKEO0QgY1xOSZDg/viewform?embedded=true" width="100%" height="941" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        </div>
+                        
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer class="site-footer">
-      <p>© <span id="year"></span> CrackWise.</p>
+    <!-- Support Features -->
+    <section class="section" style="background: var(--bg-subtle);">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2>How We Can Help</h2>
+                <p class="mt-4">We're committed to supporting your learning journey</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Technical Support</h3>
+                    <p class="feature-description">
+                        Having trouble with the platform? Our technical team is here to help you resolve any issues quickly.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/>
+                            <path d="M7 9H17V11H7V9ZM7 12H15V14H7V12Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Study Guidance</h3>
+                    <p class="feature-description">
+                        Need help with your study strategy? We provide personalized guidance to help you make the most of our platform.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Feature Requests</h3>
+                    <p class="feature-description">
+                        Have ideas for new features? We value your feedback and continuously improve based on student needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CrackWise</h4>
+                    <p>Smart preparation platform for JEE and NEET aspirants. Study efficiently with curated content and intelligent tracking.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="study.html">Study Materials</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Help Center</a></li>
+                        <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank">Community</a></li>
+                        <li><a href="mailto:contact.crackwise@gmail.com">Email Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://x.com/CrackWisein" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/crackwise.in/" target="_blank">Instagram</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> CrackWise. All rights reserved. Built with ❤️ for students.</p>
+            </div>
+        </div>
     </footer>
 
-
+    <!-- Scripts -->
     <script src="script.js" defer></script>
-    <script src="responsive.js"></script>
-  </body>
- </html>
-
-
+    
+    <style>
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+        }
+        
+        .contact-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-subtle);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .method-details h4 {
+            margin: 0 0 var(--space-1);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .method-details p {
+            margin: 0 0 var(--space-1);
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .method-note {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .response-info {
+            margin-top: var(--space-8);
+        }
+        
+        .info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            padding: var(--space-6);
+            background: var(--primary-subtle);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-lg);
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .info-card h4 {
+            margin: 0 0 var(--space-2);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .info-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+        
+        .success-message,
+        .error-message {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-6);
+        }
+        
+        .success-message {
+            background: var(--success-light);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+        
+        .error-message {
+            background: var(--danger-light);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+        
+        .success-icon,
+        .error-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .success-message h4,
+        .error-message h4 {
+            margin: 0 0 var(--space-1);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .success-message p,
+        .error-message p {
+            margin: 0;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .section .grid {
+                grid-template-columns: 1fr !important;
+                gap: var(--space-8) !important;
+            }
+            
+            .contact-methods {
+                gap: var(--space-4);
+            }
+            
+            .contact-method {
+                padding: var(--space-3);
+            }
+        }
+    </style>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Contact form handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const formData = new FormData(this);
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const successMsg = document.getElementById('form-success');
+            const errorMsg = document.getElementById('form-error');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending...';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `
+                    Send Message
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"/>
+                    </svg>
+                `;
+                
+                // Show success message
+                this.style.display = 'none';
+                successMsg.classList.remove('hidden');
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    this.reset();
+                    this.style.display = 'flex';
+                    successMsg.classList.add('hidden');
+                }, 3000);
+                
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

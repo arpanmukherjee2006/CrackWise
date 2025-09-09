@@ -1,484 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crackwise - Smart JEE, NEET Preparation | Concept Sheets & PYQs </title>
-     <meta name="description" content="Stop wasting time. Crackwise provides smart JEE & NEET prep with high-weightage concept sheets, PYQs, and problems. Study efficiently and boost your score.">
-    <meta name="keywords" content="JEE preparation, NEET preparation, online coaching, study material, concept sheets, PYQs">
-     <meta property="og:title" content="Crackwise - Smart JEE & NEET Preparation">
-    <meta property="og:description" content="Study Less, Score More. Master high-weightage topics with curated concept sheets and PYQs.">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrackWise - Smart JEE & NEET Preparation</title>
+    <meta name="description" content="Master JEE & NEET with smart preparation. Focus on high-weightage topics, practice with curated problems, and track your progress.">
+    <meta name="keywords" content="JEE preparation, NEET preparation, online coaching, study material, concept sheets, practice questions">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://qvmemiyjzksklnovejvk.supabase.co" crossorigin>
-    <link rel="dns-prefetch" href="//qvmemiyjzksklnovejvk.supabase.co">
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="nav-left">
-        <a class="brand" href="index.html">CrackWise</a>
-      </div>
-      <div class="nav-right">
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-        <div id="auth-ctas" class="auth-ctas">
-          <a class="signup-btn" href="signup.html">Signup</a>
-          <button id="login-open" class="btn primary">Login</button>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="brand">CrackWise</a>
         </div>
-        <div id="user-menu" class="user-menu hidden">
-          <div class="profile-dropdown">
-            <button id="profile-btn" class="profile-btn" aria-label="User profile menu">
-              <div class="profile-avatar">
-                <span id="user-initial">U</span>
-              </div>
-              <span id="user-greeting" class="user-greeting"></span>
-              <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                <path d="M6 8L2 4h8L6 8z"/>
-              </svg>
-            </button>
-            <div id="profile-dropdown" class="profile-dropdown-menu hidden">
-              <a href="study.html" class="dropdown-item">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M3 2v12h10V2H3zm8 10H5v-1h6v1zm0-2H5V9h6v1zm0-2H5V7h6v1zm0-2H5V5h6v1z"/>
-                </svg>
-                Study Materials
-              </a>
-              <button id="set-password-btn" class="dropdown-item">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M8 1L5 4h2v4H3V6L0 9l3 3v-2h4v4H5l3 3 3-3h-2v-4h4v2l3-3-3-3v2H9V4h2L8 1z"/>
-                </svg>
-                Set Password
-              </button>
-              <button id="logout-btn" class="dropdown-item logout-item">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
-                </svg>
-                Logout
-              </button>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
             </div>
-          </div>
         </div>
-      </div>
-    </header>
+        <div class="nav-right">
+            <div id="auth-section">
+                <a href="signup.html" class="btn btn-secondary">Sign Up</a>
+                <button id="login-btn" class="btn btn-primary">Login</button>
+            </div>
+            <div id="user-section" class="hidden">
+                <div id="user-menu" class="user-menu">
+                    <div class="profile-dropdown">
+                        <button id="profile-btn" class="profile-btn" aria-label="User profile menu">
+                            <div class="profile-avatar">
+                                <span id="user-initial">U</span>
+                            </div>
+                            <span id="user-greeting" class="user-greeting"></span>
+                            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M6 8L2 4h8L6 8z"/>
+                            </svg>
+                        </button>
+                        <div id="profile-dropdown" class="profile-dropdown-menu hidden">
+                            <a href="study.html" class="dropdown-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M2 2v12h12V2H2zm2 2h8v8H4V4zm1 2h6v1H5V6zm0 2h6v1H5V8zm0 2h3v1H5v-1z"/>
+                                </svg>
+                                Study
+                            </a>
+                            <button id="set-password-btn" class="dropdown-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 1a4 4 0 0 1 4 4v2h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2h4V5a2 2 0 0 0-2-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg>
+                                Set Password
+                            </button>
+                            <button id="logout-btn" class="dropdown-item logout-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
+                                </svg>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <main>
-      <!-- Enhanced Landing Hero -->
-      <section id="landing" class="landing hero">
-        <div class="hero-background">
-          <div class="hero-gradient"></div>
-          <div class="hero-pattern"></div>
-        </div>
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <div class="hero-announcement">
-              <span class="announcement-badge">🚀</span>
-              <span class="announcement-text">AI-powered study recommendations coming soon!</span>
-            </div>
-            <h1 class="tagline">Study Less, Score More  JEE/NEET Smart Prep</h1>
-            <p class="subtext">
-              Stop wasting time on low-weightage topics. Start mastering what actually matters. Get exam-ready with smart concept sheets, targeted PYQs and problems
-            </p>
-            <div class="cta-row">
-              <button id="start-smart-prep" class="btn primary cta-primary">
-                <span>Start Smart Prep</span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"/>
-                </svg>
-              </button>
-            <a href="about.html">
-              <button class="btn secondary cta-secondary">
-                <span>About Us</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate-fade-in">
+                <h1 class="hero-title">Smart Preparation for JEE & NEET</h1>
+                <p class="hero-subtitle">
+                    Focus on what matters most. Master high-weightage topics with curated study materials, 
+                    practice problems, and intelligent progress tracking.
+                </p>
+                <div class="hero-actions">
+                    <button id="start-prep-btn" class="btn btn-primary">
+                        Start Smart Prep
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"/>
+                        </svg>
+                    </button>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
                 
-              </button></a>
+                <!-- Hero Stats -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">80%+</span>
+                        <span class="stat-label">Marks Coverage</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Concept Sheets</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Practice Questions</span>
+                    </div>
+                </div>
             </div>
-            <div class="hero-badges">
-              <span class="pill enhanced">🎯 JEE</span>
-              <span class="pill enhanced">🧬 NEET</span>
-              <span class="pill enhanced">📱 Mobile Friendly</span>
-              <span class="pill enhanced">🌙 Dark Mode</span>
-            </div>
-            <div class="hero-stats">
-              <div class="hero-stat-item">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Concept sheets</div>
-              </div>
-              <div class="hero-stat-item">
-                <div class="stat-number">80%+</div>
-                <div class="stat-label">High-Weightage Syllabus</div>
-              </div>
-              <div class="hero-stat-item">
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Questions</div>
-              </div>
-            </div>
-          </div>
-          <div class="hero-art">
-            <div class="hero-card enhanced">
-              <div class="card-glow"></div>
-              <div class="hero-stat">
-                <div class="hero-stat-label">Estimated Marks Covered</div>
-                <div class="hero-stat-value">+80%</div>
-              </div>
-              <div class="hero-progress">
-                <div class="hero-progress-bar animated" style="width: 80%"></div>
-              </div>
-              <div class="hero-caption">Focus on the 20% that yields 80% marks.</div>
-              <div class="floating-elements">
-                <div class="floating-icon">📊</div>
-                <div class="floating-icon">⚡</div>
-                <div class="floating-icon">🎯</div>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!-- Why Smart Study Section -->
-      <section class="section features">
-        <h2 class="section-title">Why CrackWise?</h2>
-        <div class="feature-grid">
-          <article class="feature">
-            <div class="feature-icon">🎯</div>
-            <h3>High-Weightage First</h3>
-            <p>Chapters sorted by real past-paper weightage so you learn what matters most.</p>
-          </article>
-          <article class="feature">
-            <div class="feature-icon">🧠</div>
-            <h3>Shortcut Sheets</h3>
-            <p>Concise formula sheets and repeated question patterns per chapter.</p>
-          </article>
-          <article class="feature">
-            <div class="feature-icon">📚</div>
-            <h3>Problems with Solutions</h3>
-            <p>Chapter-wise solved problems to practice and master concepts.</p>
-          </article>
-          <article class="feature">
-            <div class="feature-icon">🤖</div>
-            <h3>AI Recommendations (Coming Soon)</h3>
-            <p>Get personalized study suggestions tailored to your progress.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- How it Works Section -->
-      <section class="section how">
-        <h2 class="section-title">How it works</h2>
-        <div class="steps-container">
-          <div class="step-item">
-            <div class="step-number">1</div>
-            <div class="step-content">
-              <h3>Sign up and choose</h3>
-              <p>Create your account and select your exam: JEE or NEET to get started.</p>
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2>Why Choose CrackWise?</h2>
+                <p class="mt-4">Smart features designed to maximize your exam performance</p>
             </div>
-          </div>
-          <div class="step-item">
-            <div class="step-number">2</div>
-            <div class="step-content">
-              <h3>Access study materials</h3>
-              <p>Browse through our personalized study materials sorted by weightage.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card animate-fade-in">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">High-Weightage First</h3>
+                    <p class="feature-description">
+                        Chapters sorted by real exam weightage so you focus on topics that matter most for your score.
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-fade-in">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z"/>
+                            <path d="M7 7H17V9H7V7ZM7 11H17V13H7V11ZM7 15H13V17H7V15Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Concept Sheets</h3>
+                    <p class="feature-description">
+                        Concise formula sheets and key concepts organized for quick revision and better retention.
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-fade-in">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Practice Problems</h3>
+                    <p class="feature-description">
+                        Curated practice questions with detailed solutions to reinforce your understanding.
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-fade-in">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Progress Tracking</h3>
+                    <p class="feature-description">
+                        Monitor your learning journey with detailed analytics and personalized insights.
+                    </p>
+                </div>
             </div>
-          </div>
-          <div class="step-item">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h3>Study smart</h3>
-              <p>Use chapter shortcut pages with formulas and Problems with Solutions.</p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section" style="background: var(--bg-subtle);">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2>How It Works</h2>
+                <p class="mt-4">Get started in three simple steps</p>
             </div>
-          </div>
-        
+            
+            <div class="steps-grid">
+                <div class="step-item animate-slide-in">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Sign Up & Choose</h3>
+                    <p class="step-description">
+                        Create your account and select your target exam (JEE or NEET) to get personalized content.
+                    </p>
+                </div>
+                
+                <div class="step-item animate-slide-in">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Access Materials</h3>
+                    <p class="step-description">
+                        Browse through curated study materials organized by weightage and difficulty level.
+                    </p>
+                </div>
+                
+                <div class="step-item animate-slide-in">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Study Smart</h3>
+                    <p class="step-description">
+                        Use concept sheets, practice problems, and track your progress to maximize efficiency.
+                    </p>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
-      <!-- Stats Section -->
-      <section class="section stats">
-        <h2 class="section-title">By the Numbers</h2>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-num">80%</div>
-            <div class="stat-label">Score focus</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">30–40</div>
-            <div class="stat-label">Problems/chapter</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Mobile-first UI</div>
-          </div>
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="card text-center" style="max-width: 600px; margin: 0 auto;">
+                <h2 class="mb-4">Ready to Start Your Smart Preparation?</h2>
+                <p class="mb-6">Join thousands of students who are already studying smarter, not harder.</p>
+                <div class="flex gap-4 justify-center">
+                    <a href="signup.html" class="btn btn-primary">Get Started Free</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
         </div>
-      </section>
-
+    </section>
 
     <!-- Login Modal -->
-    <dialog id="login-modal" class="modal centered">
-      <div class="modal-card auth-card">
-        <div class="modal-header">
-          <h3>Welcome back to CrackWise</h3>
-          <button type="button" id="login-close" class="icon-btn" aria-label="Close">✕</button>
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Welcome Back</h3>
+                <button id="close-modal" class="btn btn-ghost">&times;</button>
+            </div>
+            <form id="login-form" class="modal-body">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary w-full">Login</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="magic-link-btn" class="btn btn-secondary w-full">Login with Magic Link</button>
+                </div>
+                <div class="text-center">
+                    <p class="text-muted">Don't have an account? <a href="signup.html">Sign up here</a></p>
+                </div>
+                <div id="login-error" class="error-message hidden"></div>
+            </form>
         </div>
-        <div class="modal-body">
-          <form id="login-form" method="dialog" class="auth-form" autocomplete="on">
-            <div class="field">
-              <label for="login-email">Email</label>
-              <input id="login-email" type="email" placeholder="you@example.com" required />
+    </div>
+    
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="crackwise-logo">CrackWise</h4>
+                    <p>Smart preparation platform for JEE and NEET aspirants. Study efficiently with curated content and intelligent tracking.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="study.html">Study Materials</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Help Center</a></li>
+                        <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank">Community</a></li>
+                        <li><a href="mailto:contact.crackwise@gmail.com">Email Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://x.com/CrackWisein" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/crackwise.in/" target="_blank">Instagram</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="field">
-              <label for="login-password">Password</label>
-              <input id="login-password" type="password" placeholder="••••••••" required />
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> <strong class="crackwise-text">CrackWise</strong>. All rights reserved. Built with ❤️ for students.</p>
             </div>
-            <button type="submit" class="btn primary full">Login</button>
-            <button type="button" id="send-magic" class="btn secondary full">Use Magic Link Instead</button>
-            <p id="login-error" class="form-error" role="alert"></p>
-            <div class="form-footer">
-              <p>New here? <a href="signup.html">Create an account</a></p>
-            </div>
-          </form>
-          <div class="auth-benefits">
-            <h4>Why Choose CrackWise?</h4>
-            <ul class="benefits-list">
-              <li>📊 High-weightage chapters first</li>
-              <li>📝 Formula sheets & PYQs</li>
-              <li>⚡ Quick quizzes for recall</li>
-              <li>📈 Progress analytics</li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </dialog>
-
-    <!-- Enhanced Footer -->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-main">
-          <div class="footer-brand">
-            <div class="footer-logo">
-              <span class="brand-text">CrackWise</span>
-            </div>
-            <p class="footer-description">
-              The ultimate JEE/NEET preparation platform that helps students crack exams with smart strategies and comprehensive study materials.
-            </p>
-            <div class="social-links">
-              <a href="https://x.com/CrackWisein" class="social-link" aria-label="X">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
-                </svg>
-              </a>
-              <a href="https://www.linkedin.com/company/crackwise" class="social-link" aria-label="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-              <a href="https://www.instagram.com/crackwise.in/" class="social-link" aria-label="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-
-              
-            </div>
-          </div>
-          
-          <div class="footer-links">
-            <div class="footer-column">
-
-
-              <!-- <h4 class="footer-heading">Platform</h4>
-              <ul class="footer-list">
-
-                <li><a href="#" class="footer-link">JEE Preparation</a></li>
-                <li><a href="#" class="footer-link">NEET Preparation</a></li>
-                <li><a href="#" class="footer-link">Practice Tests</a></li>
-                <li><a href="#" class="footer-link">Progress Analytics</a></li>
-              </ul> -->
-            </div>
-            
-            <div class="footer-column">
-              <!-- <h4 class="footer-heading">Resources</h4>
-              <ul class="footer-list">
-                <li><a href="#" class="footer-link">Formula Sheets</a></li>
-                <li><a href="#" class="footer-link">Previous Year Papers</a></li>
-                <li><a href="#" class="footer-link">Quick Quizzes</a></li>
-                <li><a href="#" class="footer-link">Study Tips</a></li>
-                <li><a href="#" class="footer-link">Exam Calendar</a></li>
-              </ul> -->
-            </div>
-            
-            <div class="footer-column">
-              <h4 class="footer-heading">Support</h4>
-              <ul class="footer-list">
-                <!-- <li><a href="#" class="footer-link">Help Center</a></li> -->
-                <li><a href="contact.html" class="footer-link">Contact Us</a></li>
-                <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank" class="footer-link">Community</a></li>
-                <!-- <li><a href="#" class="footer-link">Feedback</a></li>
-                <li><a href="#" class="footer-link">Bug Reports</a></li> -->
-              </ul>
-            </div>
-            
-            <div class="footer-column">
-              <h4 class="footer-heading">Company</h4>
-              <ul class="footer-list">
-                <li><a href="about.html" class="footer-link">About Us</a></li>
-                <!-- <li><a href="#" class="footer-link">Privacy Policy</a></li>
-                <li><a href="#" class="footer-link">Terms of Service</a></li>
-                <li><a href="#" class="footer-link">Careers</a></li> -->
-                <li><a href="blog.html" class="footer-link">Blog</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="footer-bottom">
-          <div class="footer-bottom-content">
-            <p class="copyright">© <span id="year"></span> CrackWise. All rights reserved. Built with ❤️ for Students.</p>
-            <div class="footer-badges">
-              <span class="footer-badge">🔒 Secure</span>
-              <span class="footer-badge">📱 Mobile First</span>
-              <span class="footer-badge">⚡ Fast</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </footer>
 
-    <!-- Set Password Modal for Magic Link Users -->
-    <dialog id="set-password-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Set Your Password</h3>
-          <button id="set-password-close" class="close-btn" aria-label="Close modal">&times;</button>
+       <!-- Set Password Modal -->
+    <dialog id="set-password-modal" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Set Password</h3>
+                <button id="set-password-close" class="btn btn-ghost" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="set-password-form" class="modal-body">
+                <div class="form-group">
+                    <label for="new-password" class="form-label">New Password</label>
+                    <div class="password-input-wrapper" style="position: relative;">
+                        <input type="password" id="new-password" class="form-input" placeholder="••••••••" required style="padding-right: 40px;">
+                        <span class="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password" class="form-label">Confirm Password</label>
+                    <div class="password-input-wrapper" style="position: relative;">
+                        <input type="password" id="confirm-password" class="form-input" placeholder="••••••••" required style="padding-right: 40px;">
+                        <span class="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary w-full" style="margin-top: 1rem;">Set Password</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="skip-password" class="btn btn-secondary w-full">Skip for now</button>
+                </div>
+                <div id="set-password-error" class="error-message"></div>
+            </form>
         </div>
-        <div class="modal-body">
-          <p>Please set a password for your account so you can easily login next time.</p>
-          <form id="set-password-form" class="auth-form">
-            <div class="form-group">
-              <label for="new-password">New Password</label>
-              <input type="password" id="new-password" name="new-password" required minlength="6" placeholder="Enter a secure password">
-            </div>
-            <div class="form-group">
-              <label for="confirm-password">Confirm Password</label>
-              <input type="password" id="confirm-password" name="confirm-password" required minlength="6" placeholder="Confirm your password">
-            </div>
-            <div id="set-password-error" class="error-message"></div>
-            <div class="form-actions">
-              <button type="submit" class="btn primary">Save Password</button>
-              <button type="button" id="skip-password" class="btn secondary">Skip for Now</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </dialog>
 
-    </footer>
-
-    <!-- Password Set Modal for Magic Link Users -->
-    <dialog id="set-password-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Set Your Password</h3>
-          <button id="set-password-close" class="close-btn" aria-label="Close modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Please set a password for your account. This will allow you to login with your email and password in the future.</p>
-          <form id="set-password-form" class="form">
-            <div class="field">
-              <label for="new-password">New Password</label>
-              <input id="new-password" name="new-password" type="password" placeholder="Enter new password" minlength="6" required />
-            </div>
-            <div class="field">
-              <label for="confirm-password">Confirm Password</label>
-              <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm your password" minlength="6" required />
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn primary full">Set Password</button>
-              <button type="button" id="skip-password" class="btn secondary full">Skip for Now</button>
-            </div>
-            <p id="set-password-error" class="form-error" role="alert"></p>
-          </form>
-        </div>
-      </div>
-    </dialog>
-
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
     <script src="config.js" defer></script>
     <script src="script.js" defer></script>
-    
     <script>
-      // Mobile menu toggle functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navRight = document.querySelector('.nav-right');
-        
-        if (menuToggle && navRight) {
-          menuToggle.addEventListener('click', function() {
-            navRight.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-          });
-          
-          // Close menu when clicking outside
-          document.addEventListener('click', function(event) {
-            if (navRight.classList.contains('active') && 
-                !navRight.contains(event.target) && 
-                !menuToggle.contains(event.target)) {
-              navRight.classList.remove('active');
-              document.body.classList.remove('menu-open');
-            }
-          });
-        }
-        
-        // Ensure dropdown works properly on mobile
-        const profileBtn = document.getElementById('profile-btn');
-        const profileDropdown = document.getElementById('profile-dropdown');
-        
-        if (profileBtn && profileDropdown) {
-          profileBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profileDropdown.classList.toggle('show');
-            
-            // Update aria-expanded attribute
-            const isExpanded = profileDropdown.classList.contains('show');
-            profileBtn.setAttribute('aria-expanded', isExpanded);
-          });
-          
-          // Close dropdown when clicking outside
-          document.addEventListener('click', function(event) {
-            if (!profileBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
-              profileDropdown.classList.remove('show');
-              profileBtn.setAttribute('aria-expanded', 'false');
-            }
-          });
-        }
-      });
+        // Force check login status immediately when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded event fired');
+            // Force immediate UI update based on login status
+            setTimeout(function() {
+                const user = localStorage.getItem('smartstudy_user');
+                console.log('Immediate check - User in localStorage:', !!user);
+                const authSection = document.getElementById('auth-section');
+                const userSection = document.getElementById('user-section');
+                
+                if (user) {
+                    console.log('User found in localStorage, updating UI');
+                    if (authSection) {
+                        authSection.classList.add('hidden');
+                        authSection.style.display = 'none';
+                    }
+                    if (userSection) {
+                        userSection.classList.remove('hidden');
+                        userSection.style.display = 'flex';
+                    }
+                } else {
+                    console.log('No user in localStorage, showing auth section');
+                    if (authSection) {
+                        authSection.classList.remove('hidden');
+                        authSection.style.display = 'flex';
+                    }
+                    if (userSection) {
+                        userSection.classList.add('hidden');
+                        userSection.style.display = 'none';
+                    }
+                }
+            }, 100); // Small delay to ensure DOM is ready
+        });
     </script>
     
-    <!-- Password Set Modal for Magic Link Users -->
-    <dialog id="set-password-modal" class="modal">
-      <div class="modal-header">
-        <h3>Set Your Password</h3>
-        <button id="set-password-close" class="modal-close" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Create a password to easily log in next time without using a magic link.</p>
-        <form id="set-password-form">
-          <div class="field">
-            <label for="new-password">Enter Password</label>
-            <input type="password" id="new-password" required minlength="6">
-          </div>
-          <div class="field">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" required minlength="6">
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Set Password</button>
-            <button type="button" id="skip-password" class="btn btn-secondary">Skip for Now</button>
-          </div>
-        </form>
-        <div id="set-password-error" class="error-message"></div>
-      </div>
-    </dialog>
-  </body>
+    <style>
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 400px;
+            margin: var(--space-4);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .modal-body {
+            padding: var(--space-6);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.875rem;
+            margin-top: var(--space-2);
+            padding: var(--space-3);
+            background: var(--danger-light);
+            border-radius: var(--radius);
+        }
+        
+        .text-muted {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        /* Set Password Modal Dialog Styles */
+        .modal-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            background: transparent;
+            border: none;
+            padding: 0;
+            max-width: 90%;
+            width: 400px;
+            max-height: 90vh;
+            overflow: visible;
+        }
+        
+        .modal-dialog::backdrop {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-dialog .modal-content {
+            animation: modal-pop 0.3s ease-out;
+            margin: 0;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+        }
+        
+        @keyframes modal-pop {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .modal-dialog {
+                width: 90%;
+            }
+        }
+    </style>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Check URL parameters for showLogin
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('showLogin') === 'true') {
+            const loginModal = document.getElementById('login-modal');
+            if (loginModal) {
+                loginModal.classList.remove('hidden');
+                loginModal.classList.add('show');
+            }
+        }
+        
+        // Modal functionality
+        const loginBtn = document.getElementById('login-btn');
+        const loginModal = document.getElementById('login-modal');
+        const closeModal = document.getElementById('close-modal');
+        const startPrepBtn = document.getElementById('start-prep-btn');
+        
+        loginBtn?.addEventListener('click', () => {
+            loginModal.classList.remove('hidden');
+            loginModal.classList.add('show');
+        });
+        
+        closeModal?.addEventListener('click', () => {
+            loginModal.classList.remove('show');
+            setTimeout(() => loginModal.classList.add('hidden'), 200);
+        });
+        
+        loginModal?.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('show');
+                setTimeout(() => loginModal.classList.add('hidden'), 200);
+            }
+        });
+        
+        startPrepBtn?.addEventListener('click', () => {
+            window.location.href = 'signup.html';
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.animationFillMode = 'both';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-fade-in, .animate-slide-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
 </html>

@@ -26,11 +26,7 @@
             <input id="search-input" class="search" type="text" placeholder="Search chapters..." aria-label="Search chapters" />
         </div>
         <div class="nav-right">
-            <button id="mobile-search-btn" class="icon-btn show-sm" aria-label="Open search" title="Search">🔍</button>
-            <div id="auth-buttons" class="auth-buttons">
-                <button id="login-button" class="btn btn-primary">Login</button>
-            </div>
-            <div id="user-menu" class="user-menu hidden">
+            <div id="user-menu" class="user-menu">
                 <div class="profile-dropdown">
                     <button id="profile-btn" class="profile-btn" aria-label="User profile menu">
                         <div class="profile-avatar">
@@ -42,18 +38,24 @@
                         </svg>
                     </button>
                     <div id="profile-dropdown" class="profile-dropdown-menu hidden">
-                        <button id="set-password-btn" class="dropdown-item">
+                        <a href="study.html" class="dropdown-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M8 1L5 4h2v4H3V6L0 9l3 3v-2h4v4H5l3 3 3-3h-2v-4h4v2l3-3-3-3v2H9V4h2L8 1z"/>
+                                <path d="M2 2v12h12V2H2zm2 2h8v8H4V4zm1 2h6v1H5V6zm0 2h6v1H5V8zm0 2h3v1H5v-1z"/>
                             </svg>
-                            Set Password
-                        </button>
-                        <button id="logout-btn" class="dropdown-item logout-item">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
-                            </svg>
-                            Logout
-                        </button>
+                            Study
+                        </a>
+                         <button id="set-password-btn" class="dropdown-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 1a4 4 0 0 1 4 4v2h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2h4V5a2 2 0 0 0-2-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg>
+                                Set Password
+                            </button>
+                            <button id="logout-btn" class="dropdown-item logout-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
+                                </svg>
+                                Logout
+                            </button>
                     </div>
                 </div>
             </div>
@@ -143,61 +145,277 @@
         </div>
     </main>
 
+       <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CrackWise</h4>
+                    <p>Smart preparation platform for JEE and NEET aspirants. Study efficiently with curated content and intelligent tracking.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="study.html">Study Materials</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Help Center</a></li>
+                        <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank">Community</a></li>
+                        <li><a href="mailto:contact.crackwise@gmail.com">Email Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://x.com/CrackWisein" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/crackwise.in/" target="_blank">Instagram</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> CrackWise. All rights reserved. Built with ❤️ for students.</p>
+            </div>
+        </div>
+    </footer>
+
+       <!-- Set Password Modal -->
+    <dialog id="set-password-modal" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Set Password</h3>
+                <button id="set-password-close" class="btn btn-ghost" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="set-password-form" class="modal-body">
+                <div class="form-group">
+                    <label for="new-password" class="form-label">New Password</label>
+                    <div class="password-input-wrapper" style="position: relative;">
+                        <input type="password" id="new-password" class="form-input" placeholder="••••••••" required style="padding-right: 40px;">
+                        <span class="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password" class="form-label">Confirm Password</label>
+                    <div class="password-input-wrapper" style="position: relative;">
+                        <input type="password" id="confirm-password" class="form-input" placeholder="••••••••" required style="padding-right: 40px;">
+                        <span class="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary w-full" style="margin-top: 1rem;">Set Password</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="skip-password" class="btn btn-secondary w-full">Skip for now</button>
+                </div>
+                <div id="set-password-error" class="error-message"></div>
+            </form>
+        </div>
+    </dialog>
+ <style>
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 400px;
+            margin: var(--space-4);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .modal-body {
+            padding: var(--space-6);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.875rem;
+            margin-top: var(--space-2);
+            padding: var(--space-3);
+            background: var(--danger-light);
+            border-radius: var(--radius);
+        }
+        
+        .text-muted {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        /* Set Password Modal Dialog Styles */
+        .modal-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            background: transparent;
+            border: none;
+            padding: 0;
+            max-width: 90%;
+            width: 400px;
+            max-height: 90vh;
+            overflow: visible;
+        }
+        
+        .modal-dialog::backdrop {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-dialog .modal-content {
+            animation: modal-pop 0.3s ease-out;
+            margin: 0;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+        }
+        
+        @keyframes modal-pop {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .modal-dialog {
+                width: 90%;
+            }
+        }
+    </style>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Modal functionality
+        const loginBtn = document.getElementById('login-btn');
+        const loginModal = document.getElementById('login-modal');
+        const closeModal = document.getElementById('close-modal');
+        const startPrepBtn = document.getElementById('start-prep-btn');
+        
+        loginBtn?.addEventListener('click', () => {
+            loginModal.classList.remove('hidden');
+            loginModal.classList.add('show');
+        });
+        
+        closeModal?.addEventListener('click', () => {
+            loginModal.classList.remove('show');
+            setTimeout(() => loginModal.classList.add('hidden'), 200);
+        });
+        
+        loginModal?.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('show');
+                setTimeout(() => loginModal.classList.add('hidden'), 200);
+            }
+        });
+        
+        startPrepBtn?.addEventListener('click', () => {
+            window.location.href = 'signup.html';
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.animationFillMode = 'both';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-fade-in, .animate-slide-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+    <script src="config.js" defer></script>
     <script src="study-data.js" defer></script>
     <script src="chemistry-data.js" defer></script>
     <script src="mathematics-data.js" defer></script>
     <script src="neet-physics-data.js" defer></script>
     <script src="neet-chemistry-data.js" defer></script>
     <script src="neet-biology-data.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
     <script src="study-script.js" defer></script>
-    <!-- Login Modal -->
-    <dialog id="login-modal" class="modal">
-        <div class="modal-content">
-            <h2>Login to CrackWise</h2>
-            <form id="login-form" class="auth-form">
-                <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-full">Login</button>
-                <button type="button" id="send-magic-btn" class="btn btn-outline w-full mt-2">Send Magic Link Instead</button>
-                <div class="form-footer">
-                    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-                </div>
-            </form>
-        </div>
-    </dialog>
-    
-    <!-- Password Set Modal for Magic Link Users -->
-    <dialog id="set-password-modal" class="modal">
-      <div class="modal-header">
-        <h3>Set Your Password</h3>
-        <button id="set-password-close" class="modal-close" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Create a password to easily log in next time without using a magic link.</p>
-        <form id="set-password-form">
-          <div class="field">
-            <label for="new-password">Enter Password</label>
-            <input type="password" id="new-password" required minlength="6">
-          </div>
-          <div class="field">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" required minlength="6">
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Set Password</button>
-            <button type="button" id="skip-password" class="btn btn-secondary">Skip for Now</button>
-          </div>
-        </form>
-        <div id="set-password-error" class="error-message"></div>
-      </div>
-    </dialog>
 </body>
 </html>

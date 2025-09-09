@@ -1,84 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>About – CrackWise</title>
-    <meta name="description" content="CrackWise helps JEE and NEET aspirants focus on high‑weightage topics with structured study materials, problems, and progress tracking." />
-    <link rel="canonical" href="about.html" />
-    <meta property="og:title" content="About – CrackWise" />
-    <meta property="og:description" content="Learn how CrackWise makes JEE/NEET prep smarter with curated study plans and practice." />
-    <meta property="og:type" content="website" />
-    <meta name="robots" content="index,follow" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - CrackWise</title>
+    <meta name="description" content="Learn about CrackWise's mission to help JEE and NEET aspirants study smarter with curated content and intelligent tracking.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="nav-left">
-        <a class="brand" href="index.html">CrackWise</a>
-      </div>
-      <div class="nav-right">
-        <a class="nav-link" href="study.html">Study</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-        <button id="mobile-menu-btn" class="icon-btn show-sm" aria-label="Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </header>
     
-    <div id="mobile-menu" class="mobile-menu" style="display:none;">
-      <a href="study.html">Study</a>
-      <a href="contact.html">Contact</a>
-    </div>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="brand">CrackWise</a>
+        </div>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div id="auth-section">
+                <a href="signup.html" class="btn btn-secondary">Sign Up</a>
+                <button id="login-btn" class="btn btn-primary">Login</button>
+            </div>
+            <div id="user-section" class="hidden">
+                <div id="user-menu" class="user-menu">
+                    <div class="profile-dropdown">
+                        <button id="profile-btn" class="profile-btn" aria-label="User profile menu">
+                            <div class="profile-avatar">
+                                <span id="user-initial">U</span>
+                            </div>
+                            <span id="user-greeting" class="user-greeting"></span>
+                            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M6 8L2 4h8L6 8z"/>
+                            </svg>
+                        </button>
+                        <div id="profile-dropdown" class="profile-dropdown-menu hidden">
+                            <a href="study.html" class="dropdown-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M2 2v12h12V2H2zm2 2h8v8H4V4zm1 2h6v1H5V6zm0 2h6v1H5V8zm0 2h3v1H5v-1z"/>
+                                </svg>
+                                Study
+                            </a>
+                            <button id="set-password-btn" class="dropdown-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 1a4 4 0 0 1 4 4v2h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2h4V5a2 2 0 0 0-2-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg>
+                                Set Password
+                            </button>
+                            <button id="logout-btn" class="dropdown-item logout-item">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M3 1h6v2H3v10h6v2H3a2 2 0 01-2-2V3a2 2 0 012-2zm8 4l3 3-3 3v-2H6V6h5V4z"/>
+                                </svg>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <section class="page-hero">
-      <h1>About CrackWise</h1>
-      <p>Smarter prep for JEE and NEET – focus on what matters most.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">About CrackWise</h1>
+                <p class="hero-subtitle">
+                    We're on a mission to help students crack competitive exams with smart preparation strategies and curated study materials.
+                </p>
+            </div>
+        </div>
     </section>
 
-    <main class="container" style="max-width:980px; padding:24px;">
-      <div class="two-col" style="margin-bottom:24px;">
-        <div class="card" style="padding:20px;">
-          <h2>Our mission</h2>
-          <p>Help students crack competitive exams with clarity and confidence through curated content, targeted practice problems, and a beautiful distraction‑free experience.</p>
+    <!-- Mission Section -->
+    <section class="section">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8);">
+                <div class="card">
+                    <div class="feature-icon mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="mb-4">Our Mission</h3>
+                    <p>
+                        To revolutionize exam preparation by helping students focus on high-impact topics, 
+                        providing curated content, and enabling smarter study strategies that maximize results 
+                        while minimizing time investment.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="feature-icon mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="mb-4">Why CrackWise?</h3>
+                    <p>
+                        We believe in quality over quantity. Our platform prioritizes high-weightage chapters, 
+                        delivers clean study flows, and provides intelligent insights so you can learn faster 
+                        and track your progress effortlessly.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="card" style="padding:20px;">
-          <h2>Why CrackWise?</h2>
-          <p>We prioritize high‑weightage chapters and deliver clean study flows so you learn faster and track your progress effortlessly.</p>
-        </div>
-      </div>
+    </section>
 
-      <div class="feature-grid">
-        <div class="feature">
-          <h3>Curated Materials</h3>
-          <p>Clear theory with structured chapters and subtopics.</p>
+    <!-- Features Section -->
+    <section class="section" style="background: var(--bg-subtle);">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2>What We Offer</h2>
+                <p class="mt-4">Comprehensive tools and resources for effective exam preparation</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z"/>
+                            <path d="M7 7H17V9H7V7ZM7 11H17V13H7V11ZM7 15H13V17H7V15Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Curated Study Materials</h3>
+                    <p class="feature-description">
+                        Carefully selected content focusing on high-weightage topics with clear explanations 
+                        and structured learning paths designed for maximum retention.
+                    </p>
+                    <div class="mt-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">High-weightage topics prioritized</span>
+                        </div>
+                        <div class="flex gap-2 mb-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">Structured learning paths</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">Clear concept explanations</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Practice Problems</h3>
+                    <p class="feature-description">
+                        Extensive collection of practice questions with detailed step-by-step solutions 
+                        to reinforce learning and build problem-solving confidence.
+                    </p>
+                    <div class="mt-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">1000+ practice questions</span>
+                        </div>
+                        <div class="flex gap-2 mb-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">Detailed step-by-step solutions</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">Progressive difficulty levels</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Progress Analytics</h3>
+                    <p class="feature-description">
+                        Advanced tracking system that monitors your learning journey and provides 
+                        personalized insights to optimize your study strategy.
+                    </p>
+                    <div class="mt-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">Detailed performance analytics</span>
+                        </div>
+                        <div class="flex gap-2 mb-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">Personalized study insights</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="text-success">✓</span>
+                            <span class="text-muted">Smart recommendations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="feature">
-          <h3>Practice Problems</h3>
-          <p>Topic‑wise problems with step‑by‑step solutions.</p>
-        </div>
-        <div class="feature">
-          <h3>Ai-Powered Progress Tracking</h3>
-          <p>Coming Soon</p>
-        </div>
-      </div>
-    </main>
+    </section>
 
-    <footer class="site-footer">
-      <p>© <span id="year"></span> CrackWise.</p>
+    <!-- Stats Section -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2>Our Impact</h2>
+                <p class="mt-4">Numbers that reflect our commitment to student success</p>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">80%+</span>
+                    <span class="stat-label">Syllabus Coverage with High-Weightage Topics</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Comprehensive Concept Sheets</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Practice Questions with Solutions</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Values Section -->
+    <section class="section" style="background: var(--bg-subtle);">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2>Our Values</h2>
+                <p class="mt-4">The principles that guide everything we do</p>
+            </div>
+            
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-8);">
+                <div class="text-center">
+                    <div class="feature-icon mb-6" style="margin: 0 auto var(--space-6);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="mb-4">Quality First</h3>
+                    <p class="text-muted">
+                        We prioritize quality content over quantity, ensuring every resource adds real value to your preparation.
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="feature-icon mb-6" style="margin: 0 auto var(--space-6);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="mb-4">Student-Centric</h3>
+                    <p class="text-muted">
+                        Every feature and decision is made with student success in mind, focusing on what truly helps you learn.
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="feature-icon mb-6" style="margin: 0 auto var(--space-6);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="mb-4">Continuous Innovation</h3>
+                    <p class="text-muted">
+                        We constantly evolve our platform based on student feedback and the latest educational research.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="card text-center" style="max-width: 600px; margin: 0 auto;">
+                <h2 class="mb-4">Ready to Transform Your Preparation?</h2>
+                <p class="mb-6">
+                    Join the CrackWise community and experience a smarter way to prepare for JEE and NEET.
+                </p>
+                <div class="flex gap-4 justify-center">
+                    <a href="signup.html" class="btn btn-primary">Get Started</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CrackWise</h4>
+                    <p>Smart preparation platform for JEE and NEET aspirants. Study efficiently with curated content and intelligent tracking.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="study.html">Study Materials</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Help Center</a></li>
+                        <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank">Community</a></li>
+                        <li><a href="mailto:contact.crackwise@gmail.com">Email Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://x.com/CrackWisein" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/crackwise.in/" target="_blank">Instagram</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> CrackWise. All rights reserved. Built with ❤️ for students.</p>
+            </div>
+        </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="script.js" defer></script>
-    <script src="responsive.js"></script>
-  </body>
- </html>
-
-
+    
+    <style>
+        .text-success {
+            color: var(--success);
+        }
+        
+        .text-muted {
+            color: var(--text-muted);
+        }
+        
+        /* Additional responsive styles */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: var(--space-16) 0;
+            }
+            
+            .card {
+                padding: var(--space-6);
+            }
+            
+            .feature-card {
+                padding: var(--space-6);
+            }
+            
+            .flex.gap-4.justify-center {
+                flex-direction: column;
+                gap: var(--space-4);
+                align-items: center;
+            }
+            
+            .flex.gap-4.justify-center .btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

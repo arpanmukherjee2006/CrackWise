@@ -12,17 +12,7 @@
         score: 0,
         completed: false
     };
-    
-    // Supabase client getter (reusing from script.js)
-    let supabaseClient = null;
-    function getSupabase() {
-        if (supabaseClient) return supabaseClient;
-        if (window.supabase && window.__SUPABASE_URL && window.__SUPABASE_ANON_KEY) {
-            supabaseClient = window.supabase.createClient(window.__SUPABASE_URL, window.__SUPABASE_ANON_KEY);
-            return supabaseClient;
-        }
-        return null;
-    }
+    let mobileSearchVisible = false;
     
     // Performance optimization: Cache DOM elements
     const domCache = {};
@@ -153,7 +143,12 @@
 
     // Utility functions - optimized with caching
     const byId = (id) => getCachedElement(id);
-    // Supabase client is already defined above, removing duplicate
+    const getSupabase = () => {
+        if (window.supabase && window.__SUPABASE_URL && window.__SUPABASE_ANON_KEY) {
+            return window.supabase.createClient(window.__SUPABASE_URL, window.__SUPABASE_ANON_KEY);
+        }
+        return null;
+    };
 
     // Theme management - Always dark mode
     function initTheme() {
@@ -165,137 +160,6 @@
         }
     }
 
-    // Authentication functions
-    async function getUser() {
-        const sb = getSupabase();
-        if (!sb) {
-            try {
-                return JSON.parse(localStorage.getItem('smartstudy_user') || 'null');
-            } catch {
-                return null;
-            }
-        }
-        const { data } = await sb.auth.getUser();
-        return data?.user || null;
-    }
-    
-    // Initialize authentication listeners
-    function initAuthListeners() {
-        const loginModal = document.getElementById('login-modal');
-        const loginForm = document.getElementById('login-form');
-        const sendMagicBtn = document.getElementById('send-magic-btn');
-        const loginButton = document.getElementById('login-button');
-        const userMenu = document.getElementById('user-menu');
-        const authButtons = document.getElementById('auth-buttons');
-        
-        if (!loginModal || !loginForm || !sendMagicBtn) return;
-        
-        // Check auth status and update UI
-        getUser().then(user => {
-            if (user) {
-                if (userMenu) userMenu.classList.remove('hidden');
-                if (authButtons) authButtons.classList.add('hidden');
-                
-                // Update user profile display
-                updateUserProfileDisplay(user);
-            } else {
-                if (userMenu) userMenu.classList.add('hidden');
-                if (authButtons) authButtons.classList.remove('hidden');
-            }
-        });
-        
-        // Listen for auth state changes (important for magic link sign-ins)
-        const sb = getSupabase();
-        if (sb) {
-            sb.auth.onAuthStateChange((event, session) => {
-                if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
-                    const user = session?.user;
-                    if (user) {
-                        if (userMenu) userMenu.classList.remove('hidden');
-                        if (authButtons) authButtons.classList.add('hidden');
-                        
-                        // Update user profile display
-                        updateUserProfileDisplay(user);
-                    }
-                } else if (event === 'SIGNED_OUT') {
-                    if (userMenu) userMenu.classList.add('hidden');
-                    if (authButtons) authButtons.classList.remove('hidden');
-                }
-            });
-        }
-        
-        // Login button click
-        if (loginButton) {
-            loginButton.addEventListener('click', () => {
-                loginModal.showModal();
-            });
-        }
-        
-        // Login form submission
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            
-            if (!email || !password) {
-                alert('Please enter both email and password');
-                return;
-            }
-            
-            try {
-                const sb = getSupabase();
-                if (!sb) {
-                    alert('Authentication service unavailable');
-                    return;
-                }
-                
-                const { data, error } = await sb.auth.signInWithPassword({
-                    email,
-                    password
-                });
-                
-                if (error) throw error;
-                
-                loginModal.close();
-                window.location.reload();
-            } catch (error) {
-                alert('Login failed: ' + error.message);
-            }
-        });
-        
-        // Magic link button
-        sendMagicBtn.addEventListener('click', async () => {
-            const email = document.getElementById('login-email').value;
-            
-            if (!email) {
-                alert('Please enter your email address');
-                return;
-            }
-            
-            try {
-                const sb = getSupabase();
-                if (!sb) {
-                    alert('Authentication service unavailable');
-                    return;
-                }
-                
-                const { error } = await sb.auth.signInWithOtp({
-                    email,
-                    options: {
-                        emailRedirectTo: window.location.origin + '/study.html'
-                    }
-                });
-                
-                if (error) throw error;
-                
-                alert('Magic link sent! Please check your email.');
-                loginModal.close();
-            } catch (error) {
-                alert('Failed to send magic link: ' + error.message);
-            }
-        });
-    }
-    
     // Load progress data from Supabase
     async function loadProgressFromSupabase() {
         try {
@@ -358,33 +222,6 @@
     }
     
     // User authentication
-    // Function to update user profile display elements
-    function updateUserProfileDisplay(user) {
-        if (!user) return;
-        
-        const greeting = byId('user-greeting');
-        const userInitial = byId('user-initial');
-        const profileBtn = byId('profile-btn');
-        
-        if (greeting) {
-            const name = user.user_metadata?.full_name || user.email;
-            greeting.textContent = name;
-        }
-        
-        if (userInitial) {
-            const name = user.user_metadata?.full_name || user.email;
-            userInitial.textContent = name.charAt(0).toUpperCase();
-        }
-        
-        // Update profile button if it exists
-        if (profileBtn) {
-            const userMenu = document.getElementById('user-menu');
-            if (userMenu) userMenu.classList.remove('hidden');
-            const authButtons = document.getElementById('auth-buttons');
-            if (authButtons) authButtons.classList.add('hidden');
-        }
-    }
-    
     async function initAuth() {
         const user = await getUser();
         if (!user) {
@@ -395,8 +232,16 @@
         // Load progress data from Supabase
         await loadProgressFromSupabase();
         
-        // Update user profile display
-        updateUserProfileDisplay(user);
+        const greeting = byId('user-greeting');
+        const userInitial = byId('user-initial');
+        if (greeting && user) {
+            const name = user.user_metadata?.full_name || user.email;
+            greeting.textContent = name;
+            // Set first name as data attribute for mobile view
+            const firstName = name.split(' ')[0];
+            greeting.setAttribute('data-firstname', firstName);
+            if (userInitial) userInitial.textContent = name.charAt(0).toUpperCase();
+        }
 
         // Setup profile dropdown
         setupProfileDropdown();
@@ -453,8 +298,6 @@
         const profileBtn = byId('profile-btn');
         const profileDropdown = byId('profile-dropdown');
         const logoutBtn = byId('logout-btn');
-        const setPasswordBtn = byId('set-password-btn');
-        const setPasswordModal = byId('set-password-modal');
 
         if (profileBtn && profileDropdown) {
             profileBtn.addEventListener('click', (e) => {
@@ -464,36 +307,6 @@
                 profileDropdown.classList.toggle('show', !isOpen);
                 profileBtn.setAttribute('aria-expanded', !isOpen);
             });
-            
-            // Set Password button functionality
-            if (setPasswordBtn && setPasswordModal) {
-                setPasswordBtn.addEventListener('click', () => {
-                    // Close the dropdown
-                    profileDropdown.classList.add('hidden');
-                    profileDropdown.classList.remove('show');
-                    profileBtn.setAttribute('aria-expanded', 'false');
-                    
-                    // Open the password modal
-                    setPasswordModal.showModal();
-                });
-            }
-            
-            // Logout functionality
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', async () => {
-                    try {
-                        const sb = getSupabase();
-                        if (sb) {
-                            await sb.auth.signOut();
-                        }
-                        localStorage.removeItem('smartstudy_user');
-                        window.location.href = 'index.html';
-                    } catch (error) {
-                        console.error('Logout error:', error);
-                        alert('Failed to log out. Please try again.');
-                    }
-                });
-            }
 
             document.addEventListener('click', (e) => {
                 if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
@@ -509,15 +322,40 @@
                 const sb = getSupabase();
                 if (sb) await sb.auth.signOut();
                 else localStorage.removeItem('smartstudy_user');
+                
+                // Redirect to landing page
                 window.location.href = 'index.html';
             });
         }
     }
 
+    // Check user login status and update UI
+    async function checkUserLoginStatus() {
+        const user = await getUser();
+        const userGreeting = byId('user-greeting');
+        const userInitial = byId('user-initial');
+        
+        if (user) {
+            // User is logged in
+            // Update user greeting and initial
+            if (userGreeting) {
+                const name = user.user_metadata?.full_name || user.email || 'User';
+                userGreeting.textContent = name;
+                if (userInitial) userInitial.textContent = name.charAt(0).toUpperCase();
+            }
+        } else {
+            // User is not logged in - redirect to landing page
+            window.location.href = 'index.html';
+        }
+    }
+    
     // Initialize the page
     async function initializePage() {
         try {
             showLoading();
+            
+            // Check user login status
+            await checkUserLoginStatus();
             
             // Load progress from Supabase first
             await loadProgressFromSupabase();
@@ -530,19 +368,27 @@
             const urlSubject = urlParams.get('subject');
             const urlChapter = urlParams.get('chapter');
             
-            // Set subject from URL if provided
+            // Get saved subject and chapter from localStorage
+            const savedSubject = localStorage.getItem('study_subject');
+            const savedChapter = localStorage.getItem('study_chapter');
+            
+            // Priority: URL parameters > localStorage > default
+            // Set subject from URL if provided, otherwise use saved subject
             if (urlSubject && SUBJECT_DATA[urlSubject]) {
                 currentSubject = urlSubject;
+            } else if (savedSubject && SUBJECT_DATA[savedSubject]) {
+                currentSubject = savedSubject;
             }
             
             setupSubjectTabs();
             loadChapterList();
             setupEventListeners();
             
-            // Load specific chapter from URL or first chapter by default
+            // Load specific chapter from URL, localStorage, or first chapter by default
             const currentData = SUBJECT_DATA[currentSubject];
             let chapterToLoad = null;
             
+            // First try URL parameter
             if (urlChapter && currentData) {
                 // First try to find chapter by exact key match
                 if (currentData[urlChapter]) {
@@ -568,7 +414,12 @@
                 }
             }
             
-            // If no specific chapter found, load first chapter
+            // If no chapter from URL, try localStorage
+            if (!chapterToLoad && savedChapter && currentData[savedChapter]) {
+                chapterToLoad = savedChapter;
+            }
+            
+            // If still no specific chapter found, load first chapter
             if (!chapterToLoad && currentData) {
                 chapterToLoad = Object.keys(currentData)[0];
             }
@@ -867,6 +718,10 @@
         console.log('Loading chapter:', chapterKey, 'in subject:', currentSubject);
         
         currentChapter = chapterKey;
+        
+        // Save current subject and chapter to localStorage for persistence across sessions
+        localStorage.setItem('study_subject', currentSubject);
+        localStorage.setItem('study_chapter', chapterKey);
         
         // Update active chapter
         document.querySelectorAll('.chapter-item').forEach(item => {
@@ -2045,83 +1900,112 @@
         initTabs();
         initSearch();
         updateProgress();
-        setupPasswordModal();
+        setupSetPasswordModal();
 
         // Set current year
         const yearElement = byId('year');
         if (yearElement) yearElement.textContent = new Date().getFullYear();
     }
     
-    // Setup password modal functionality
-    function setupPasswordModal() {
+    // Setup Set Password Modal
+    function setupSetPasswordModal() {
+        const setPasswordBtn = byId('set-password-btn');
         const setPasswordModal = byId('set-password-modal');
         const setPasswordClose = byId('set-password-close');
-        const skipPasswordBtn = byId('skip-password');
         const setPasswordForm = byId('set-password-form');
-        const setPasswordError = byId('set-password-error');
+        const skipPasswordBtn = byId('skip-password');
+        const passwordToggles = document.querySelectorAll('.password-toggle');
         
-        if(setPasswordModal) {
-            if(setPasswordClose) setPasswordClose.addEventListener('click', () => setPasswordModal.close());
-            
-            if(skipPasswordBtn) skipPasswordBtn.addEventListener('click', () => {
-                setPasswordModal.close();
+        if (setPasswordBtn && setPasswordModal) {
+            setPasswordBtn.addEventListener('click', () => {
+                setPasswordModal.showModal();
             });
             
-            if(setPasswordForm) setPasswordForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const newPassword = document.getElementById('new-password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
-                
-                // Reset error message
-                if(setPasswordError) setPasswordError.textContent = '';
-                
-                // Validate passwords match
-                if(newPassword !== confirmPassword) {
-                    if(setPasswordError) {
-                        setPasswordError.textContent = 'Passwords do not match';
-                        return;
-                    }
-                }
-                
-                // Validate password length
-                if(newPassword.length < 6) {
-                    if(setPasswordError) {
-                        setPasswordError.textContent = 'Password must be at least 6 characters';
-                        return;
-                    }
-                }
-                
-                try {
-                    const sb = getSupabase();
-                    if(!sb) {
-                        if(setPasswordError) setPasswordError.textContent = 'Error: Could not connect to authentication service';
+            if (setPasswordClose) {
+                setPasswordClose.addEventListener('click', () => {
+                    setPasswordModal.close();
+                });
+            }
+            
+            if (skipPasswordBtn) {
+                skipPasswordBtn.addEventListener('click', () => {
+                    setPasswordModal.close();
+                });
+            }
+            
+            if (setPasswordForm) {
+                setPasswordForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const newPassword = byId('new-password').value;
+                    const confirmPassword = byId('confirm-password').value;
+                    const errorElement = byId('set-password-error');
+                    
+                    // Clear previous error
+                    if (errorElement) errorElement.textContent = '';
+                    
+                    // Validate passwords
+                    if (newPassword !== confirmPassword) {
+                        if (errorElement) errorElement.textContent = 'Passwords do not match';
                         return;
                     }
                     
-                    const { error } = await sb.auth.updateUser({
-                        password: newPassword
-                    });
+                    if (newPassword.length < 6) {
+                        if (errorElement) errorElement.textContent = 'Password must be at least 6 characters';
+                        return;
+                    }
                     
-                    if(error) {
-                        if(setPasswordError) setPasswordError.textContent = error.message;
-                    } else {
-                        // Update the profile to indicate user has set a password
-                        const user = await getUser();
-                        if(user) {
-                            await sb.from('profiles').update({
-                                has_password: true,
-                                updated_at: new Date().toISOString()
-                            }).eq('id', user.id);
+                    try {
+                        const sb = getSupabase();
+                        if (sb) {
+                            const { error } = await sb.auth.updateUser({ password: newPassword });
+                            if (error) throw error;
+                            
+                            // Show success message
+                            if (errorElement) {
+                                errorElement.textContent = 'Password updated successfully';
+                                errorElement.style.color = 'green';
+                            }
+                            
+                            // Close modal after a delay
+                            setTimeout(() => {
+                                setPasswordModal.close();
+                                // Reset form
+                                setPasswordForm.reset();
+                                if (errorElement) {
+                                    errorElement.textContent = '';
+                                    errorElement.style.color = '';
+                                }
+                            }, 1500);
                         }
-                        
-                        // Close modal
-                        setPasswordModal.close();
+                    } catch (error) {
+                        console.error('Error updating password:', error);
+                        if (errorElement) errorElement.textContent = error.message || 'Failed to update password';
                     }
-                } catch(err) {
-                    console.error('Error setting password:', err);
-                    if(setPasswordError) setPasswordError.textContent = 'An unexpected error occurred';
-                }
-            });
+                });
+            }
+            
+            // Setup password toggles
+            if (passwordToggles.length > 0) {
+                passwordToggles.forEach(toggle => {
+                    toggle.addEventListener('click', (e) => {
+                        const passwordInput = e.target.closest('.password-input-wrapper').querySelector('input');
+                        if (passwordInput) {
+                            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordInput.setAttribute('type', type);
+                            
+                            // Update icon
+                            const svg = toggle.querySelector('svg');
+                            if (svg) {
+                                if (type === 'text') {
+                                    svg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+                                } else {
+                                    svg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+                                }
+                            }
+                        }
+                    });
+                });
+            }
         }
     }
 

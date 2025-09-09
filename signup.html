@@ -1,98 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create your account – CrackWise</title>
-    <link rel="stylesheet" href="style.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - CrackWise</title>
+    <meta name="description" content="Create your CrackWise account and start your smart JEE & NEET preparation journey today.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-  </head>
-  <body class="centered">
-    <header class="navbar">
-      <div class="nav-left">
-        <a class="brand" href="index.html">CrackWise</a>
-      </div>
-      <div class="nav-right">
-        <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">🌙</button>
-      </div>
-    </header>
-
-    <main class="auth-page">
-      <section class="card">
-        <h1>Create your account</h1>
-        <p class="muted">Study Less, Score More – focus on high-weightage topics only.</p>
-
-        <form id="signup-form" class="form" novalidate>
-          <div class="field">
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" required />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required />
-          </div>
-          <div class="field">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="Create a password" minlength="6" required />
-          </div>
-
-          <fieldset class="field">
-            <legend>Select Exam</legend>
-            <div class="radio-row">
-              <label class="radio">
-                <input type="radio" name="exam" value="JEE" required />
-                <span>JEE</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="exam" value="NEET" />
-                <span>NEET</span>
-              </label>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="brand">CrackWise</a>
+        </div>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
             </div>
-          </fieldset>
+        </div>
+    </nav>
 
-          <button type="submit" class="btn primary full">Create Account</button>
-          <button type="button" id="send-magic-signup" class="btn secondary full">Use Magic Link Instead</button>
-          <p class="help-text">Already have an account? <a href="login.html">Login</a></p>
-          <p id="signup-error" class="form-error" role="alert"></p>
-          <p class="muted tiny">If email rate limit exceeded, use magic link for passwordless login.</p>
-        </form>
-      </section>
-    </main>
+    <!-- Signup Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <!-- Left Side - Benefits -->
+                <div class="auth-benefits">
+                    <div class="benefits-content">
+                        <h2>Start Your Smart Preparation</h2>
+                        <p>Join thousands of students who are studying smarter with CrackWise</p>
+                        
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>High-Weightage Topics First</h4>
+                                    <p>Focus on what matters most for your exam success</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Curated Study Materials</h4>
+                                    <p>Access 50+ concept sheets and 1000+ practice questions</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Progress Tracking</h4>
+                                    <p>Monitor your learning with detailed analytics</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-proof">
+                            <div class="proof-stats">
+                                <div class="proof-stat">
+                                    <span class="stat-number">80%+</span>
+                                    <span class="stat-label">Marks Coverage</span>
+                                </div>
+                                <div class="proof-stat">
+                                    <span class="stat-number">1000+</span>
+                                    <span class="stat-label">Questions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Form -->
+                <div class="auth-form-container">
+                    <div class="auth-form-card">
+                        <div class="form-header">
+                            <h1>Create Your Account</h1>
+                            <p>Start your smart preparation journey today</p>
+                        </div>
+                        
+                        <form id="signup-form" class="auth-form">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-input" placeholder="Create a strong password" minlength="6" required>
+                                <div class="password-hint">Minimum 6 characters</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Select Your Exam</label>
+                                <div class="exam-selection">
+                                    <label class="exam-option">
+                                        <input type="radio" name="exam" value="JEE" required>
+                                        <div class="exam-card">
+                                            <div class="exam-icon">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="exam-info">
+                                                <h4>JEE</h4>
+                                                <p>Joint Entrance Examination</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    
+                                    <label class="exam-option">
+                                        <input type="radio" name="exam" value="NEET" required>
+                                        <div class="exam-card">
+                                            <div class="exam-icon">
+                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="exam-info">
+                                                <h4>NEET</h4>
+                                                <p>Medical Entrance Exam</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-full auth-submit">
+                                Create Account
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"/>
+                                </svg>
+                            </button>
 
-    <footer class="site-footer">
-      <p>© <span id="year"></span> CrackWise.</p>
+                            
+                            <div id="signup-message" class="form-message mt-3" style="display: none;">
+                                <p>The confirmation link has been sent to your email. Please check your inbox and click on the link to complete your registration. If you face any issues, feel free to contact us.</p>
+                            </div>
+                            
+                            <button type="button" id="signup-magic-link-btn" class="btn btn-secondary w-full mt-4">
+                                Sign Up with Magic Link
+                            </button>
+                            <p class="muted tiny">If email rate limit exceeded, use magic link for passwordless login.</p>
+                            <div id="magic-link-message" class="form-message mt-3" style="display: none;">
+                            
+                            </div>
+                            
+                            <div id="signup-error" class="form-message error-message mt-3" style="display: none;">
+                                <p id="error-text">Error message will appear here</p>
+                            </div>
+                            
+                            <div class="form-footer">
+                                <p>Already have an account? <a href="#" id="sign-in-link" class="auth-link">Sign in here</a></p>
+                            </div>
+                            
+                 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> <strong class="crackwise-text">CrackWise</strong>. All rights reserved. Built with ❤️ for students.</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Password Set Modal for Magic Link Users -->
-    <dialog id="set-password-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Set Your Password</h3>
-          <button id="set-password-close" class="close-btn" aria-label="Close modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Please set a password for your account. This will allow you to login with your email and password in the future.</p>
-          <form id="set-password-form" class="form">
-            <div class="field">
-              <label for="new-password">New Password</label>
-              <input id="new-password" name="new-password" type="password" placeholder="Enter new password" minlength="6" required />
-            </div>
-            <div class="field">
-              <label for="confirm-password">Confirm Password</label>
-              <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm your password" minlength="6" required />
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn primary full">Set Password</button>
-              <button type="button" id="skip-password" class="btn secondary full">Skip for Now</button>
-            </div>
-            <p id="set-password-error" class="form-error" role="alert"></p>
-          </form>
-        </div>
-      </div>
-    </dialog>
-
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
     <script src="config.js" defer></script>
     <script src="script.js" defer></script>
-  </body>
+    
+    <style>
+        .auth-section {
+            padding: var(--space-12) 0;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-message {
+            background-color: var(--color-bg-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+            margin-top: var(--space-3);
+            font-size: 0.9rem;
+            border-left: 3px solid var(--color-primary);
+        }
+        
+        .form-message p {
+            margin: 0;
+            color: var(--color-text-secondary);
+        }
+        
+        .auth-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .auth-benefits {
+            padding: var(--space-8);
+        }
+        
+        .benefits-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .benefits-content p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+        
+        .benefit-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-subtle);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .benefit-item h4 {
+            margin: 0 0 var(--space-1);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .benefit-item p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .social-proof {
+            padding: var(--space-6);
+            background: var(--bg-subtle);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+        
+        .proof-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-6);
+        }
+        
+        .proof-stat {
+            text-align: center;
+        }
+        
+        .proof-stat .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--space-1);
+        }
+        
+        .proof-stat .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        .auth-form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-10);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+        
+        .form-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+            color: var(--text);
+        }
+        
+        .form-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+        
+        .password-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: var(--space-1);
+        }
+        
+        .exam-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+        }
+        
+        .exam-option {
+            cursor: pointer;
+        }
+        
+        .exam-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .exam-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-6);
+            background: var(--bg-subtle);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+        }
+        
+        .exam-option:hover .exam-card {
+            border-color: var(--primary);
+            background: var(--primary-subtle);
+        }
+        
+        .exam-option input[type="radio"]:checked + .exam-card {
+            border-color: var(--primary);
+            background: var(--primary-subtle);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .exam-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: var(--space-3);
+        }
+        
+        .exam-info h4 {
+            margin: 0 0 var(--space-1);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .exam-info p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .auth-submit {
+            padding: var(--space-4) var(--space-6);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: var(--space-4);
+        }
+        
+        .form-footer p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .auth-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: var(--radius-lg);
+            color: var(--danger);
+            margin-top: var(--space-4);
+        }
+        
+        .error-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        
+        .error-message h4 {
+            margin: 0 0 var(--space-1);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .error-message p {
+            margin: 0;
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-8);
+            }
+            
+            .auth-benefits {
+                order: 2;
+                padding: var(--space-4);
+            }
+            
+            .benefits-content h2 {
+                font-size: 2rem;
+            }
+            
+            .benefits-content p {
+                font-size: 1.125rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .auth-section {
+                padding: var(--space-8) 0;
+            }
+            
+            .auth-form-card {
+                padding: var(--space-6);
+            }
+            
+            .exam-selection {
+                grid-template-columns: 1fr;
+            }
+            
+            .exam-card {
+                flex-direction: row;
+                text-align: left;
+                padding: var(--space-4);
+            }
+            
+            .exam-icon {
+                margin-bottom: 0;
+                margin-right: var(--space-3);
+                width: 40px;
+                height: 40px;
+            }
+            
+            .proof-stats {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+        }
+    </style>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Form handling
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const errorMsg = document.getElementById('signup-error');
+            const errorText = document.getElementById('error-text');
+            
+            // Hide previous errors
+            if (errorMsg) {
+                errorMsg.style.display = 'none';
+            }
+            
+            // Validate form
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const exam = formData.get('exam');
+            
+            if (!name || !email || !password || !exam) {
+                if (errorText) errorText.textContent = 'Please fill in all required fields.';
+                if (errorMsg) errorMsg.style.display = 'block';
+                return;
+            }
+            
+            if (password.length < 6) {
+                if (errorText) errorText.textContent = 'Password must be at least 6 characters long.';
+                if (errorMsg) errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Creating Account...';
+            
+            // Show confirmation message
+            const signupMessage = document.getElementById('signup-message');
+            if (signupMessage) {
+                signupMessage.style.display = 'block';
+            }
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `
+                    Create Account
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"/>
+                    </svg>
+                `;
+                
+                // Wait for 3 seconds to show the message before redirecting
+                setTimeout(() => {
+                    // Redirect to study page or show success
+                    window.location.href = 'study.html';
+                }, 3000);
+                
+            }, 2000);
+        });
+    </script>
+</body>
 </html>
