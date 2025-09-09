@@ -108,6 +108,9 @@
     if (user) {
       // User is logged in - always hide auth section (signup/login buttons) and show user section (profile dropdown)
       console.log('User is logged in, hiding auth section');
+      // Set a flag in localStorage to indicate user is logged in
+      localStorage.setItem('user_is_logged_in', 'true');
+      
       if (authSection) {
         authSection.classList.add('hidden');
         console.log('Auth section hidden');
@@ -127,6 +130,9 @@
     } else {
       // User is not logged in - always show auth section (signup/login buttons) and hide user section (profile dropdown)
       console.log('User is not logged in, showing auth section');
+      // Remove the flag from localStorage
+      localStorage.removeItem('user_is_logged_in');
+      
       if (authSection) {
         authSection.classList.remove('hidden');
         console.log('Auth section shown');
@@ -151,6 +157,30 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('type')) {
       console.log('URL parameter type detected:', urlParams.get('type'));
+    }
+    
+    // Set up Start Smart Prep button to check login status
+    const startPrepBtn = byId('start-prep-btn');
+    if (startPrepBtn) {
+      startPrepBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        console.log('Start Smart Prep button clicked');
+        
+        // Check the login flag in localStorage
+        const isLoggedIn = localStorage.getItem('user_is_logged_in') === 'true';
+        console.log('User logged in according to localStorage:', isLoggedIn);
+        
+        if (isLoggedIn) {
+          // User is logged in, redirect to study page
+          console.log('User is logged in, redirecting to study.html');
+          window.location.href = 'study.html';
+        } else {
+          // User is not logged in, redirect to signup page
+          console.log('User is not logged in, redirecting to signup.html');
+          window.location.href = 'signup.html';
+        }
+      });
     }
 
 
@@ -251,6 +281,10 @@
         const sb = getSupabase();
         if (sb) await sb.auth.signOut();
         else localStorage.removeItem('smartstudy_user');
+        
+        // Remove login flag from localStorage
+        localStorage.removeItem('user_is_logged_in');
+        console.log('Removed user_is_logged_in flag');
 
         // Update UI before redirecting
         const authSection = byId('auth-section');
@@ -402,16 +436,6 @@
   }
   function initSignup() {
     const f = byId('signup-form'); if (!f) return;
-    
-    // Sign in link functionality
-    const signInLink = byId('sign-in-link');
-    if (signInLink) {
-      signInLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        // Redirect to index.html and show login modal
-        window.location.href = 'index.html?showLogin=true';
-      });
-    }
     // Regular signup with password
     f.addEventListener('submit', async (e) => {
       e.preventDefault(); const name = byId('name').value.trim(); const email = byId('email').value.trim().toLowerCase(); const password = byId('password').value; const exam = (f.querySelector('input[name="exam"]:checked') || {}).value; const err = byId('signup-error'); if (!name || !email || !password || !exam) { err.textContent = 'Please fill all fields and select an exam.'; return; } const sb = getSupabase(); if (!sb) { setUserLegacy({ name, email, passwordHash: btoa(password) }); setExam(exam); err.textContent = ''; window.location.href = 'study.html'; return; } const { error } = await sb.auth.signUp({ email, password, options: { data: { full_name: name, exam } } }); if (error) { err.textContent = error.message; return; } await upsertProfileExam(exam, name, email); // Create profiles table entry if it doesn't exist
@@ -699,6 +723,10 @@
 
         if (error) throw error;
 
+        // Set login flag in localStorage
+        localStorage.setItem('user_is_logged_in', 'true');
+        console.log('Set user_is_logged_in flag to true');
+        
         loginError.style.color = 'var(--success)';
         loginError.textContent = 'Login successful! Redirecting...';
 
