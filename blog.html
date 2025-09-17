@@ -1,490 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog - CrackWise</title>
-    <meta name="description" content="Explore the latest articles, tips, and strategies for JEE and NEET exam preparation on the CrackWise blog." />
-    <link rel="canonical" href="blog.html" />
-    <meta property="og:title" content="Blog - CrackWise" />
-    <meta property="og:description" content="Discover expert tips and strategies for JEE and NEET exam preparation on the CrackWise blog." />
-    <meta property="og:type" content="website" />
-    <meta name="robots" content="index,follow" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K66LRYB86P"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - CrackWise</title>
+  <meta name="description"
+    content="Explore the latest articles, tips, and strategies for JEE and NEET exam preparation on the CrackWise blog." />
+  <link rel="canonical" href="blog.html" />
+  <meta property="og:title" content="Blog - CrackWise" />
+  <meta property="og:description"
+    content="Discover expert tips and strategies for JEE and NEET exam preparation on the CrackWise blog." />
+  <meta property="og:type" content="website" />
+  <meta name="robots" content="index,follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  gtag('config', 'G-K66LRYB86P');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K66LRYB86P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <style>
-      /* Blog specific styles */
+    gtag('config', 'G-K66LRYB86P');
+  </script>
+
+  <style>
+    /* Blog specific styles */
+    .page-hero {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: white;
+      padding: 100px 24px;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 60px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .page-hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 20px;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-hero p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    @media (min-width: 992px) {
       .page-hero {
-        background: linear-gradient(135deg, var(--primary-light), var(--primary));
-        color: white;
-        padding: 100px 24px;
-        text-align: center;
-        border-radius: 0 0 30px 30px;
-        margin-bottom: 60px;
-        box-shadow: var(--shadow);
-        width: 100%;
-        min-height: 50vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        padding: 150px 24px;
+        min-height: 60vh;
       }
-      
+
+      .page-hero h1 {
+        font-size: 4rem;
+      }
+
+      .page-hero p {
+        font-size: 1.6rem;
+      }
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .blog-post {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .blog-post:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--primary-light);
+    }
+
+    .blog-post.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .blog-post.featured {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .blog-image {
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .blog-post.featured .blog-image {
+      height: 100%;
+    }
+
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .blog-post:hover .blog-image img {
+      transform: scale(1.05);
+    }
+
+    .blog-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .blog-category {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .blog-date {
+      color: var(--text-secondary);
+    }
+
+    .blog-title {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .blog-post.featured .blog-title {
+      font-size: 1.8rem;
+    }
+
+    .blog-title a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .blog-title a:hover {
+      color: var(--primary);
+    }
+
+    .blog-excerpt {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .blog-author {
+      margin-bottom: 20px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .btn.secondary {
+      align-self: flex-start;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn.secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    @media (min-width: 768px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-hero {
+        padding: 80px 24px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .blog-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       .page-hero h1 {
         font-size: 3.2rem;
-        margin-bottom: 20px;
-        font-weight: 800;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.1);
       }
-      
-      .page-hero p {
-        font-size: 1.4rem;
-        max-width: 700px;
-        margin: 0 auto;
-        opacity: 0.9;
-        line-height: 1.6;
-      }
-      
-      @media (min-width: 992px) {
-        .page-hero {
-          padding: 150px 24px;
-          min-height: 60vh;
-        }
-        
-        .page-hero h1 {
-          font-size: 4rem;
-        }
-        
-        .page-hero p {
-          font-size: 1.6rem;
-        }
-      }
-      
-      .blog-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 40px;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-      
-      .blog-post {
-        background: var(--bg-card);
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: var(--shadow-sm);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid var(--border);
-      }
-      
-      .blog-post:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow);
-        border-color: var(--primary-light);
-      }
-      
-      .blog-post.featured {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-      
-      @media (min-width: 768px) {
-        .blog-post.featured {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      
-      .blog-image {
-        height: 240px;
-        overflow: hidden;
-      }
-      
-      .blog-post.featured .blog-image {
-        height: 100%;
-      }
-      
-      .blog-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-      
-      .blog-post:hover .blog-image img {
-        transform: scale(1.05);
-      }
-      
-      .blog-content {
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-      
-      .blog-meta {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 16px;
-        font-size: 14px;
-      }
-      
-      .blog-category {
-        background: var(--primary-light);
-        color: var(--primary);
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-weight: 500;
-      }
-      
-      .blog-date {
-        color: var(--text-secondary);
-      }
-      
-      .blog-title {
-        font-size: 1.4rem;
-        margin-bottom: 16px;
-        line-height: 1.4;
-      }
-      
-      .blog-post.featured .blog-title {
-        font-size: 1.8rem;
-      }
-      
-      .blog-title a {
-        color: var(--text);
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
-      
-      .blog-title a:hover {
-        color: var(--primary);
-      }
-      
-      .blog-excerpt {
-        color: var(--text-secondary);
-        margin-bottom: 20px;
-        line-height: 1.6;
-        flex-grow: 1;
-      }
-      
-      .blog-author {
-        margin-bottom: 20px;
-        font-weight: 500;
-        color: var(--text-secondary);
-      }
-      
-      .btn.secondary {
-        align-self: flex-start;
-        background: var(--primary-light);
-        color: var(--primary);
-        border: 1px solid var(--primary);
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-weight: 500;
-        text-decoration: none;
-        transition: all 0.2s ease;
-      }
-      
-      .btn.secondary:hover {
-        background: var(--primary);
-        color: white;
-      }
-      
-      @media (min-width: 768px) {
-        .blog-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .page-hero {
-          padding: 80px 24px;
-        }
-      }
-      
-      @media (min-width: 992px) {
-        .blog-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        
-        .page-hero h1 {
-          font-size: 3.2rem;
-        }
-      }
-      
-      /* Pagination Styles */
+    }
+
+    /* Pagination Styles */
+    .pagination-container {
+      width: 100%;
+      padding: 60px 24px;
+      background-color: var(--bg);
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .current-page {
+      margin-right: 16px;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .page-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .page-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .page-link.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+    }
+
+    .page-link.next {
+      width: auto;
+      padding: 0 20px;
+      border-radius: 25px;
+    }
+
+    @media (min-width: 768px) {
       .pagination-container {
-        width: 100%;
-        padding: 60px 24px;
-        background-color: var(--bg);
-      }
-      
-      .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      
-      .current-page {
-        margin-right: 16px;
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-      }
-      
-      .page-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        background: var(--bg-card);
-        color: var(--text);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 1.1rem;
-        border: 1px solid var(--border);
-        transition: all 0.3s ease;
-        box-shadow: var(--shadow-sm);
-      }
-      
-      .page-link:hover {
-        background: var(--primary-light);
-        color: var(--primary);
-        border-color: var(--primary);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow);
-      }
-      
-      .page-link.active {
-        background: var(--primary);
-        color: white;
-        border-color: var(--primary);
-        box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
-      }
-      
-      .page-link.next {
-        width: auto;
-        padding: 0 20px;
-        border-radius: 25px;
-      }
-      
-      @media (min-width: 768px) {
-        .pagination-container {
-          padding: 80px 24px;
-        }
-        
-        .page-link {
-          width: 50px;
-          height: 50px;
-          font-size: 1.2rem;
-        }
-      }
-      
-      /* Newsletter Section */
-      .newsletter-section {
-        background: linear-gradient(135deg, var(--primary-light), var(--primary));
         padding: 80px 24px;
-        margin: 60px 0 0;
-        border-radius: 30px 30px 0 0;
-        color: white;
-        width: 100%;
-        min-height: 50vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
-      
-      .newsletter-container {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-      }
-      
-      .newsletter-content h2 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        font-weight: 700;
-      }
-      
-      .newsletter-content p {
+
+      .page-link {
+        width: 50px;
+        height: 50px;
         font-size: 1.2rem;
-        margin-bottom: 30px;
-        opacity: 0.9;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.6;
       }
-      
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      padding: 80px 24px;
+      margin: 60px 0 0;
+      border-radius: 30px 30px 0 0;
+      color: white;
+      width: 100%;
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .newsletter-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .newsletter-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .newsletter-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .newsletter-form input {
+      padding: 18px 20px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+      width: 100%;
+    }
+
+    .newsletter-form .btn {
+      padding: 18px 20px;
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .newsletter-form .btn:hover {
+      background: var(--bg);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (min-width: 768px) {
+      .newsletter-section {
+        padding: 100px 24px;
+        min-height: 60vh;
+      }
+
+      .newsletter-content h2 {
+        font-size: 3rem;
+      }
+
       .newsletter-form {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        max-width: 500px;
-        margin: 0 auto;
-        width: 100%;
+        flex-direction: row;
       }
-      
+
       .newsletter-form input {
-        padding: 18px 20px;
-        border-radius: 12px;
-        border: none;
-        font-size: 1.1rem;
-        box-shadow: var(--shadow);
-        width: 100%;
+        flex: 1;
+        border-radius: 12px 0 0 12px;
       }
-      
+
       .newsletter-form .btn {
-        padding: 18px 20px;
-        background: white;
-        color: var(--primary);
-        border: none;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        width: 100%;
+        width: auto;
+        border-radius: 0 12px 12px 0;
       }
-      
-      .newsletter-form .btn:hover {
-        background: var(--bg);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      }
-      
-      @media (min-width: 768px) {
-        .newsletter-section {
-          padding: 100px 24px;
-          min-height: 60vh;
-        }
-        
-        .newsletter-content h2 {
-          font-size: 3rem;
-        }
-        
-        .newsletter-form {
-          flex-direction: row;
-        }
-        
-        .newsletter-form input {
-          flex: 1;
-          border-radius: 12px 0 0 12px;
-        }
-        
-        .newsletter-form .btn {
-          width: auto;
-          border-radius: 0 12px 12px 0;
-        }
-      }
-      
-      @media (min-width: 992px) {
-        .newsletter-section {
-          min-height: 70vh;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="nav-left">
-        <a class="brand" href="index.html">CrackWise</a>
-      </div>
-      <div class="nav-right">
-        <a class="nav-link" href="study.html">Study</a>
-        <a class="nav-link" href="blog.html">Blog</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-      </div>
-    </header>
+    }
 
-    <section class="page-hero">
-      <h1>CrackWise Blog</h1>
-      <p>Expert tips, strategies, and insights for JEE and NEET aspirants</p>
-    </section>
+    @media (min-width: 992px) {
+      .newsletter-section {
+        min-height: 70vh;
+      }
+    }
+  </style>
+</head>
 
-    <main class="container" style="max-width:1200px; padding:40px 24px;">
-      <div class="blog-grid">
-        <!-- Featured Blog Post -->
-        <div class="blog-post featured">
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span class="blog-category">Strategy</span>
-              <span class="blog-date">Sep 7, 2025</span>
-            </div>
-            <h2 class="blog-title"><a href="blog-post-jee-neet-2026-strategy.html">JEE/NEET 2026: Your 6-Month Preparation Strategy</a></h2>
-            <p class="blog-excerpt">With just 6 months left for JEE/NEET 2026, it's time to optimize your preparation strategy. This comprehensive guide breaks down month-by-month what you should focus on, high-yield topics, and smart study techniques to maximize your score.</p>
-            <div class="blog-author">
-              <span class="author-name">By Arpan Mukherjee</span>
-            </div>
-            <a href="blog-post-jee-neet-2026-strategy.html" class="btn secondary">Read More</a>
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <a class="brand" href="index.html">CrackWise</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-link" href="study.html">Study</a>
+      <a class="nav-link" href="blog.html">Blog</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <h1>CrackWise Blog</h1>
+    <p>Expert tips, strategies, and insights for JEE and NEET aspirants</p>
+  </section>
+
+  <main class="container" style="max-width:1200px; padding:40px 24px;">
+    <div class="blog-grid">
+      <!-- Featured Blog Post -->
+      <div class="blog-post featured">
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">Study Strategy</span>
+            <span class="blog-date">Sep 17, 2025</span>
           </div>
+          <h2 class="blog-title"><a href="blog-post-smart-study-plan-2026.html">Smart Study Plan for JEE & NEET 2026: 6
+              Months to Success with Crackwise Guidance</a></h2>
+          <p class="blog-excerpt">Master JEE and NEET 2026 with our comprehensive smart study plan. Learn strategic
+            preparation techniques focusing on high-weightage chapters, quality notes, formulas, and practice questions with detailed solutions to maximize your potential in just 6 months.</p>
+          <div class="blog-author">
+            <span class="author-name">By Arpan Mukherjee</span>
+          </div>
+          <a href="blog-post-smart-study-plan-2026.html" class="btn secondary">Read More</a>
         </div>
+      </div>
+
+      <!-- Regular Blog Post -->
+      <div class="blog-post">
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">Strategy</span>
+            <span class="blog-date">Sep 7, 2025</span>
+          </div>
+          <h2 class="blog-title"><a href="blog-post-jee-neet-2026-strategy.html">JEE/NEET 2026: Your 6-Month Preparation
+              Strategy</a></h2>
+          <p class="blog-excerpt">With just 6 months left for JEE/NEET 2026, it's time to optimize your preparation
+            strategy. This comprehensive guide breaks down month-by-month what you should focus on, high-yield topics,
+            and smart study techniques to maximize your score.</p>
+          <div class="blog-author">
+            <span class="author-name">By Arpan Mukherjee</span>
+          </div>
+          <a href="blog-post-jee-neet-2026-strategy.html" class="btn secondary">Read More</a>
+        </div>
+      </div>
 
 
 
- 
 
-  
+
+
+
+
+
   </main>
 
-       <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>CrackWise</h4>
-                     <p>Smart preparation platform for JEE and NEET aspirants.Crack exams with smart strategies and comprehensive study materials.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Platform</h4>
-                    <ul class="footer-links">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="contact.html">Help Center</a></li>
-                        <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank">Community</a></li>
-                        <li><a href="mailto:contact.crackwise@gmail.com">Email Support</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://x.com/CrackWisein" target="_blank">Twitter</a></li>
-                        <li><a href="https://www.instagram.com/crackwise.in/" target="_blank">Instagram</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="year"></span> CrackWise. All rights reserved. Built with ❤️ for students.</p>
-            </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>CrackWise</h4>
+          <p>Smart preparation platform for JEE and NEET aspirants.Crack exams with smart strategies and comprehensive
+            study materials.</p>
         </div>
-    </footer>
+        <div class="footer-section">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Help Center</a></li>
+            <li><a href="https://www.reddit.com/r/CrackWise/" target="_blank">Community</a></li>
+            <li><a href="mailto:contact.crackwise@gmail.com">Email Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul class="footer-links">
+            <li><a href="https://x.com/CrackWisein" target="_blank">Twitter</a></li>
+            <li><a href="https://www.instagram.com/crackwise.in/" target="_blank">Instagram</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> CrackWise. All rights reserved. Built with ❤️ for students.</p>
+      </div>
+    </div>
+  </footer>
 
-    <script src="script.js" defer></script>
-  </body>
+  <script src="script.js" defer></script>
+</body>
+
 </html>
