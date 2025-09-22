@@ -1354,8 +1354,16 @@
 
   // Function to open study materials with specific chapter
   function openStudyMaterials(subject = 'physics', chapterName = null, chapterKey = null) {
-    const exam = getExam();
-    if (!exam || !subject || !chapterName) return;
+    // Get exam type from URL if available
+    const urlParams = new URLSearchParams(window.location.search);
+    const examType = urlParams.get('type');
+    
+    // Set exam type in localStorage
+    if (examType) {
+      localStorage.setItem('smartstudy_exam', examType.toUpperCase());
+    }
+    
+    if (!subject || !chapterName) return;
 
     // Use provided chapterKey or generate one from the chapter name
     const finalChapterKey = chapterKey || chapterName.toLowerCase()
@@ -1373,4 +1381,66 @@
 
   // Make function globally available
   window.openStudyMaterials = openStudyMaterials;
+  
+  // Initialize study dropdown for mobile
+  function initStudyDropdown() {
+    const studyToggle = document.getElementById('study-dropdown-toggle');
+    const studySubmenu = document.getElementById('study-submenu');
+    const dropdownArrow = studyToggle ? studyToggle.querySelector('.dropdown-arrow') : null;
+    
+    if (studyToggle && studySubmenu) {
+      studyToggle.addEventListener('click', function(e) {
+        // Only handle click for mobile devices
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          e.preventDefault();
+          studySubmenu.classList.toggle('active');
+          if (dropdownArrow) {
+            dropdownArrow.classList.toggle('active');
+          }
+        }
+      });
+      
+      // Add click handlers for submenu items in mobile view
+      const submenuItems = studySubmenu.querySelectorAll('.submenu-item');
+      submenuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768) {
+            // Get exam type from href
+            const href = this.getAttribute('href');
+            const urlParams = new URLSearchParams(href.split('?')[1]);
+            const examType = urlParams.get('type');
+            
+            if (examType) {
+              // Set exam type in localStorage
+              localStorage.setItem('smartstudy_exam', examType.toUpperCase());
+            }
+            
+            // Close submenu
+            studySubmenu.classList.remove('active');
+            if (dropdownArrow) {
+              dropdownArrow.classList.remove('active');
+            }
+          }
+        });
+      });
+      
+      // Close study submenu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768 && !studySubmenu.contains(e.target) && !studyToggle.contains(e.target)) {
+          studySubmenu.classList.remove('active');
+          if (dropdownArrow) {
+            dropdownArrow.classList.remove('active');
+          }
+        }
+      });
+    }
+  }
+  
+  // Call the function when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStudyDropdown);
+  } else {
+    initStudyDropdown();
+  }
 })();

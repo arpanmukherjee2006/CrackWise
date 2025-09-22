@@ -1194,3 +1194,79 @@ a:hover {
 .shadow-sm { box-shadow: var(--shadow-sm); }
 .shadow-md { box-shadow: var(--shadow-md); }
 .shadow-lg { box-shadow: var(--shadow-lg); }
+
+/* Study Dropdown Styles */
+.study-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.study-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dropdown-arrow {
+  margin-left: auto;
+  transition: var(--transition);
+}
+
+.study-submenu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  min-width: 120px;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  z-index: 100;
+}
+
+.study-dropdown:hover .study-submenu,
+.study-submenu.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.study-dropdown:hover .dropdown-arrow,
+.dropdown-arrow.active {
+  transform: rotate(180deg);
+}
+
+.submenu-item {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.submenu-item:hover {
+  background-color: var(--primary-subtle);
+  color: var(--primary);
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .study-submenu {
+    position: fixed;
+    left: 0;
+    top: 60px; /* Adjust based on your header height */
+    width: 100%;
+    z-index: 1000;
+    background: var(--bg-card);
+    box-shadow: var(--shadow-md);
+    border-top: 1px solid var(--border);
+  }
+  
+  .submenu-item {
+    padding: var(--space-4);
+    text-align: center;
+    font-weight: 500;
+  }
+}

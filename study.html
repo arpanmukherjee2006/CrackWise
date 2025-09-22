@@ -48,12 +48,21 @@
                         </svg>
                     </button>
                     <div id="profile-dropdown" class="profile-dropdown-menu hidden">
-                        <a href="study.html" class="dropdown-item">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M2 2v12h12V2H2zm2 2h8v8H4V4zm1 2h6v1H5V6zm0 2h6v1H5V8zm0 2h3v1H5v-1z"/>
-                            </svg>
-                            Study
-                        </a>
+                        <div class="dropdown-item study-dropdown">
+                            <div class="study-dropdown-toggle" id="study-dropdown-toggle">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M2 2v12h12V2H2zm2 2h8v8H4V4zm1 2h6v1H5V6zm0 2h6v1H5V8zm0 2h3v1H5v-1z"/>
+                                </svg>
+                                Study
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 11L3 6h10l-5 5z"/>
+                                </svg>
+                            </div>
+                            <div class="study-submenu" id="study-submenu">
+                                <a href="study.html?type=jee" class="submenu-item" onclick="localStorage.setItem('smartstudy_exam', 'JEE')">JEE</a>
+                                <a href="study.html?type=neet" class="submenu-item" onclick="localStorage.setItem('smartstudy_exam', 'NEET'); event.stopPropagation();">NEET</a>
+                            </div>
+                        </div>
                          <button id="set-password-btn" class="dropdown-item">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M8 1a4 4 0 0 1 4 4v2h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2h4V5a2 2 0 0 0-2-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>

@@ -357,6 +357,18 @@
             // Check user login status
             await checkUserLoginStatus();
             
+            // Check URL parameters for exam type
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlType = urlParams.get('type');
+            if (urlType) {
+                // Set exam type based on URL parameter
+                if (urlType.toLowerCase() === 'neet') {
+                    localStorage.setItem('smartstudy_exam', 'NEET');
+                } else if (urlType.toLowerCase() === 'jee') {
+                    localStorage.setItem('smartstudy_exam', 'JEE');
+                }
+            }
+            
             // Load progress from Supabase first
             await loadProgressFromSupabase();
             
@@ -364,7 +376,6 @@
             await setupExamBasedSubjects();
             
             // Check URL parameters for direct navigation
-            const urlParams = new URLSearchParams(window.location.search);
             const urlSubject = urlParams.get('subject');
             const urlChapter = urlParams.get('chapter');
             
